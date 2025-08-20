@@ -1,0 +1,105 @@
+﻿{
+   "CodeGenerationMode": 5,
+   "ContextClassName": "comunidadsolidariaContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Models",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "public.Chat",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DetalleDonacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Donacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Envio",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.EstadoTipo",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Localidad",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Mensaje",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Notificacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Novedad",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Perfil",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Provincia",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Publicacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Reporte ",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.TipoDonacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.Usuario",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}
