@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Models.Models;
 
@@ -13,7 +14,7 @@ public partial class Envio
 
     public int LocalidadIdLocalidad { get; set; }
 
-    public DateOnly FechaEnvio { get; set; }
+    public Date FechaEnvio { get; set; }
 
     public int EstadoIdEstado { get; set; }
 

@@ -1,0 +1,89 @@
+﻿using Core.Request;
+using Core.Response;
+using Microsoft.EntityFrameworkCore;
+using Models.Models;
+using Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Services.Services
+{
+    public class DonacionService : IDonacionService
+    {
+        private readonly comunidadsolidariaContext _context;
+
+        public DonacionService(comunidadsolidariaContext context)
+        {
+            _context = context;
+        }
+        public async Task<IEnumerable<DonacionDtoOut>> GetDonacions()
+        {
+            return await _context.Donacion.Select(m => new DonacionDtoOut
+            {
+                Id = m.Id,
+                Descripcion = m.Descripcion,
+                FechaHora = m.FechaHora,
+                NombreTipoDonacionIdTipoDonacion = m.TipoDonacionIdTipoDonacionNavigation.Descripcion,
+                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                
+            }).ToArrayAsync();
+        }
+        public async Task<Donacion?> GetById(int id)
+        {
+            return await _context.Donacion.FindAsync(id);
+        }
+
+        public async Task<DonacionDtoOut?> GetDonacionDtoById(int id)
+        {
+            return await _context.Donacion.Where(m => m.Id == id).Select(m => new DonacionDtoOut
+            {
+                Id = m.Id,
+                Descripcion = m.Descripcion,
+                FechaHora = m.FechaHora,
+                NombreTipoDonacionIdTipoDonacion = m.TipoDonacionIdTipoDonacionNavigation.Descripcion,
+                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+
+
+            }).SingleOrDefaultAsync();
+        }
+
+        public async Task<Donacion> Create(DonacionDtoIn donacion)
+        {
+            var newDonacion = new Donacion();
+
+            newDonacion.Descripcion = newDonacion.Descripcion;
+            newDonacion.FechaHora = newDonacion.FechaHora;
+            newDonacion.TipoDonacionIdTipoDonacion = newDonacion.TipoDonacionIdTipoDonacion;
+            newDonacion.UsuarioIdUsuario = newDonacion.UsuarioIdUsuario;
+
+            _context.Donacion.Add(newDonacion);
+            await _context.SaveChangesAsync();
+            return newDonacion;
+        }
+
+        public async Task Update(int id, DonacionDtoIn donacion)
+        {
+            var existDonacion = await GetById(id);
+            if (existDonacion != null)
+            {
+                existDonacion.Descripcion = donacion.Descripcion;
+                existDonacion.FechaHora = donacion.FechaHora;
+                existDonacion.TipoDonacionIdTipoDonacion = donacion.TipoDonacionIdTipoDonacion;
+                existDonacion.UsuarioIdUsuario = donacion.UsuarioIdUsuario;
+            }
+
+        }
+        public async Task Delete(int id)
+        {
+            var toDelete = await GetById(id);
+            if (toDelete != null)
+            {
+                _context.Donacion.Remove(toDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
+    }
+}
