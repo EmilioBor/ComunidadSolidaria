@@ -67,6 +67,7 @@ namespace Services.Services
                 existDetalleDonacion.Descripcion = detalleDonacion.Descripcion;
                 existDetalleDonacion.DonacionIdDonacion = detalleDonacion.DonacionIdDonacion;
                 existDetalleDonacion.EnvioIdEnvio = detalleDonacion.EnvioIdEnvio;
+                await _context.SaveChangesAsync();
             }
 
         }

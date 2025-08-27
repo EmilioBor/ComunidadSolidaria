@@ -60,6 +60,8 @@ namespace Services.Services
             if (existEstadoTipo != null)
             {
                 existEstadoTipo.Nombre = estadoTipo.Nombre;
+
+                await _context.SaveChangesAsync();
             }
 
         }

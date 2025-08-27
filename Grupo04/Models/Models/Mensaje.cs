@@ -11,7 +11,7 @@ public partial class Mensaje
 
     public string Contenido { get; set; }
 
-    public DateOnly FechaHora { get; set; }
+    public DateTime FechaHora { get; set; }
 
     public int ChatIdChat { get; set; }
 

@@ -72,6 +72,8 @@ namespace Services.Services
                 existEnvio.FechaEnvio = envio.FechaEnvio;
                 existEnvio.EstadoIdEstado = envio.EstadoIdEstado;
                 existEnvio.LocalidadIdLocalidad = envio.LocalidadIdLocalidad;
+
+                await _context.SaveChangesAsync();
             }
 
         }

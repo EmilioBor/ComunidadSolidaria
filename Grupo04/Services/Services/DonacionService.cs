@@ -73,6 +73,8 @@ namespace Services.Services
                 existDonacion.FechaHora = donacion.FechaHora;
                 existDonacion.TipoDonacionIdTipoDonacion = donacion.TipoDonacionIdTipoDonacion;
                 existDonacion.UsuarioIdUsuario = donacion.UsuarioIdUsuario;
+
+                await _context.SaveChangesAsync();
             }
 
         }

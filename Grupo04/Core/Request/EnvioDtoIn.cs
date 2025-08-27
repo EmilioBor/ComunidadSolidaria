@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Request
 {
@@ -15,7 +14,7 @@ namespace Core.Request
 
         public int LocalidadIdLocalidad { get; set; }
 
-        public Date? FechaEnvio { get; set; }
+        public DateTime? FechaEnvio { get; set; }
 
         public int EstadoIdEstado { get; set; }
     }

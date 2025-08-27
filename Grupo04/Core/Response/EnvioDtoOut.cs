@@ -15,7 +15,7 @@ namespace Core.Response
 
         public string? NombreLocalidadIdLocalidad { get; set; }
 
-        public Date? FechaEnvio { get; set; }
+        public DateTime? FechaEnvio { get; set; }
 
         public string? NombreEstadoIdEstado { get; set; }
     }

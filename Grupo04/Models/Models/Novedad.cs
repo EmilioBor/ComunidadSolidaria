@@ -13,7 +13,7 @@ public partial class Novedad
 
     public string Descripcion { get; set; }
 
-    public DateOnly Fecha { get; set; }
+    public DateTime Fecha { get; set; }
 
     public int PerfilIdPerfil { get; set; }
 

@@ -11,7 +11,7 @@ namespace Core.Response
     {
         public int Id { get; set; }
 
-        public Date? FechaHora { get; set; }
+        public DateTime? FechaHora { get; set; }
 
         public string? NombreUsuarioIdUsuario { get; set; }
 

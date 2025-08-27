@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Models.Models;
 
@@ -10,7 +9,7 @@ public partial class Donacion
 {
     public int Id { get; set; }
 
-    public Date FechaHora { get; set; }
+    public DateTime? FechaHora { get; set; }
 
     public int UsuarioIdUsuario { get; set; }
 

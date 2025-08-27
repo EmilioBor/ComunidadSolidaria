@@ -62,6 +62,7 @@ namespace Services.Services
             {
                 existChat.PublicacionIdPublicacion = chat.IdPublicacion;
                 existChat.UsuarioIdUsuario = chat.UsuarioIdUsuario;
+                await _context.SaveChangesAsync();
             }
 
         }
