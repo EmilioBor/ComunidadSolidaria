@@ -14,7 +14,7 @@ namespace Services.Services
     public class NotificacionService : INotificacionService
     {
         private readonly comunidadsolidariaContext _context;
-
+        
         public NotificacionService(comunidadsolidariaContext context)
         {
             _context = context;
