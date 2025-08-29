@@ -15,7 +15,7 @@ public partial class Publicacion
 
     public byte[] Imagen { get; set; }
 
-    public DateOnly FechaCreacion { get; set; }
+    public DateTime FechaCreacion { get; set; }
 
     public int LocalidadIdLocalidad { get; set; }
 
