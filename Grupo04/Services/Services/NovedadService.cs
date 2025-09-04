@@ -1,5 +1,6 @@
 ﻿using Core.Request;
 using Core.Response;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Services.Interfaces;
@@ -51,14 +52,31 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
-        public async Task<Novedad> Create(NovedadDtoIn novedad)
+        public async Task<Novedad> Create(NovedadDtoIn novedad, IFormFile files)
         {
+
+            if (files == null || files.Length == 0)
+            {
+                throw new ArgumentException("No se han proporcionado imágenes.");
+            }
+            if (string.IsNullOrWhiteSpace(novedad.Descripcion))
+            {
+                throw new ArgumentException("El Nombre no puede estar vacío.");
+            }
+
+            // Convierte el archivo de imagen a un array de bytes
+            byte[] imageBytes;
+            using (var memoryStream = new MemoryStream())
+            {
+                await files.CopyToAsync(memoryStream);
+                imageBytes = memoryStream.ToArray();
+            }
             var newNovedad = new Novedad();
 
             newNovedad.Descripcion = novedad.Descripcion;
             newNovedad.Fecha = novedad.Fecha;
             newNovedad.Titulo = novedad.Titulo;
-            newNovedad.Imagen = novedad.Imagen;
+            newNovedad.Imagen = imageBytes;
             newNovedad.PerfilIdPerfil = novedad.PerfilIdPerfil;
 
 

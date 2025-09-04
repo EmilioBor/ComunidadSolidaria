@@ -1,5 +1,6 @@
 ﻿using Core.Request;
 using Core.Response;
+using Microsoft.AspNetCore.Http;
 using Models.Models;
 
 namespace Services.Interfaces
@@ -9,7 +10,7 @@ namespace Services.Interfaces
         Task<IEnumerable<NovedadDtoOut>> GetNovedads();
         Task<Novedad?> GetById(int id);
         Task<NovedadDtoOut?> GetNovedadDtoById(int id);
-        Task<Novedad> Create(NovedadDtoIn novedad);
+        Task<Novedad> Create(NovedadDtoIn novedad, IFormFile files);
         Task Update(int id, NovedadDtoIn novedad);
         Task Delete(int id);
     }

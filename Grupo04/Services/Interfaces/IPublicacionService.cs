@@ -1,5 +1,6 @@
 ﻿using Core.Request;
 using Core.Response;
+using Microsoft.AspNetCore.Http;
 using Models.Models;
 
 namespace Services.Interfaces
@@ -9,7 +10,7 @@ namespace Services.Interfaces
         Task<IEnumerable<PublicacionDtoOut>> GetPublicacions();
         Task<Publicacion?> GetById(int id);
         Task<PublicacionDtoOut?> GetPublicacionDtoById(int id);
-        Task<Publicacion> Create(PublicacionDtoIn publicacion);
+        Task<Publicacion> Create(PublicacionDtoIn publicacion, IFormFile files);
         Task Update(int id, PublicacionDtoIn publicacion);
         Task Delete(int id);
 

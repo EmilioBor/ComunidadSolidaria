@@ -38,9 +38,10 @@ namespace Grupo04.Controllers
 
         //agregar
         [HttpPost("api/v1/agrega/novedad")]
-        public async Task<IActionResult> Create(NovedadDtoIn novedadDtoIn)
+        [RequestSizeLimit(1_000_000)]
+        public async Task<IActionResult> Create([FromForm] NovedadDtoIn novedadDtoIn, IFormFile files)
         {
-            var newNovedad = await _service.Create(novedadDtoIn);
+            var newNovedad = await _service.Create(novedadDtoIn, files);
 
             return CreatedAtAction(nameof(GetNovedadById), new { id = newNovedad.Id }, newNovedad);
         }
