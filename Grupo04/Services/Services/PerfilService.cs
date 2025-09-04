@@ -1,5 +1,6 @@
 ﻿using Core.Request;
 using Core.Response;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Services.Interfaces;
@@ -57,8 +58,25 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
-        public async Task<Perfil> Create(PerfilDtoIn perfil)
+        public async Task<Perfil> Create(PerfilDtoIn perfil, IFormFile files)
         {
+            if (files == null || files.Length == 0)
+            {
+                throw new ArgumentException("No se han proporcionado imágenes.");
+            }
+            if (string.IsNullOrWhiteSpace(perfil.Descripcion))
+            {
+                throw new ArgumentException("El Nombre no puede estar vacío.");
+            }
+
+            // Convierte el archivo de imagen a un array de bytes
+            byte[] imageBytes;
+            using (var memoryStream = new MemoryStream())
+            {
+                await files.CopyToAsync(memoryStream);
+                imageBytes = memoryStream.ToArray();
+            }
+
             var newPerfil = new Perfil();
 
             newPerfil.Descripcion = perfil.Descripcion;
@@ -68,7 +86,7 @@ namespace Services.Services
             newPerfil.CuitCuil = perfil.CuitCuil;
             newPerfil.UsuarioIdUsuario = perfil.UsuarioIdUsuario;
             newPerfil.LocalidadIdLocalidad = perfil.LocalidadIdLocalidad;
-            newPerfil.Imagen = perfil.Imagen;
+            newPerfil.Imagen = imageBytes;
 
             _context.Perfil.Add(newPerfil);
             await _context.SaveChangesAsync();

@@ -50,7 +50,7 @@ namespace Services.Services
             var newLocalidad = new Localidad();
             newLocalidad.Nombre = localidad.Nombre;
             newLocalidad.CodigoPostal = localidad.CodigoPostal;
-            newLocalidad.ProvinciaIdProvincia = newLocalidad.ProvinciaIdProvincia;
+            newLocalidad.ProvinciaIdProvincia = localidad.ProvinciaIdProvincia;
 
             _context.Localidad.Add(newLocalidad);
             await _context.SaveChangesAsync();

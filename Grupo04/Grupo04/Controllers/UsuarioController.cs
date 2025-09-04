@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newUsuario = await _service.Create(usuarioDtoIn);
 
-            return CreatedAtAction(nameof(GetUsuarioById), new { id = newUsuario.Id });
+            return CreatedAtAction(nameof(GetUsuarioById), new { id = newUsuario.Id }, newUsuario);
         }
 
         //Editar

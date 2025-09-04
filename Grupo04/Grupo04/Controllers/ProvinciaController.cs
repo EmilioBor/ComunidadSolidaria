@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newProvincia = await _service.Create(provinciaDtoIn);
 
-            return CreatedAtAction(nameof(GetProvinciaById), new { id = newProvincia.Id });
+            return CreatedAtAction(nameof(GetProvinciaById), new { id = newProvincia.Id }, newProvincia);
         }
 
         //Editar

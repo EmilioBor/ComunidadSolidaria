@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newChat = await _service.Create(chatDtoIn);
 
-            return CreatedAtAction(nameof(GetChatById), new {id = newChat.Id});
+            return CreatedAtAction(nameof(GetChatById), new {id = newChat.Id}, newChat);
         }
 
         //Editar

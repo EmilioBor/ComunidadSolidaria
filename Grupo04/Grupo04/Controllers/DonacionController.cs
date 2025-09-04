@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newDonacion = await _service.Create(donacionDtoIn);
 
-            return CreatedAtAction(nameof(GetDonacionById), new { id = newDonacion.Id });
+            return CreatedAtAction(nameof(GetDonacionById), new { id = newDonacion.Id }, newDonacion);
         }
 
         //Editar

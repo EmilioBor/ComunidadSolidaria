@@ -50,9 +50,9 @@ namespace Services.Services
         {
             var newDetalleDonacion = new DetalleDonacion();
 
-            newDetalleDonacion.Descripcion = newDetalleDonacion.Descripcion;
-            newDetalleDonacion.DonacionIdDonacion = newDetalleDonacion.DonacionIdDonacion;
-            newDetalleDonacion.EnvioIdEnvio = newDetalleDonacion.EnvioIdEnvio;
+            newDetalleDonacion.Descripcion = detalleDonacion.Descripcion;
+            newDetalleDonacion.DonacionIdDonacion = detalleDonacion.DonacionIdDonacion;
+            newDetalleDonacion.EnvioIdEnvio = detalleDonacion.EnvioIdEnvio;
 
             _context.DetalleDonacion.Add(newDetalleDonacion);
             await _context.SaveChangesAsync();

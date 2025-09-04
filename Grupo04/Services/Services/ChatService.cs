@@ -40,6 +40,7 @@ namespace Services.Services
                 Id = m.Id,
                 NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
                 NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+
             }).SingleOrDefaultAsync();
         }
 
@@ -47,8 +48,8 @@ namespace Services.Services
         {
             var newChat = new Chat();
 
-            newChat.PublicacionIdPublicacion = newChat.PublicacionIdPublicacion;
-            newChat.UsuarioIdUsuarioNavigation = newChat.UsuarioIdUsuarioNavigation;
+            newChat.PublicacionIdPublicacion = chat.IdPublicacion;
+            newChat.UsuarioIdUsuario = chat.UsuarioIdUsuario;
 
             _context.Chat.Add(newChat);
             await _context.SaveChangesAsync();

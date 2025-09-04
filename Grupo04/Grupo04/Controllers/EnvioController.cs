@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newEnvio = await _service.Create(envioDtoIn);
 
-            return CreatedAtAction(nameof(GetEnvioById), new { id = newEnvio.Id });
+            return CreatedAtAction(nameof(GetEnvioById), new { id = newEnvio.Id }, newEnvio);
         }
 
         //Editar

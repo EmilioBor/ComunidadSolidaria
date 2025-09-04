@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newLocalidad = await _service.Create(localidadDtoIn);
 
-            return CreatedAtAction(nameof(GetLocalidadById), new { id = newLocalidad.Id });
+            return CreatedAtAction(nameof(GetLocalidadById), new { id = newLocalidad.Id }, newLocalidad);
         }
 
         //Editar

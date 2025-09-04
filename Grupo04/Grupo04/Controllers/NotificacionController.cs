@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newNotificacion = await _service.Create(notificacionDtoIn);
 
-            return CreatedAtAction(nameof(GetNotificacionById), new { id = newNotificacion.Id });
+            return CreatedAtAction(nameof(GetNotificacionById), new { id = newNotificacion.Id }, newNotificacion);
         }
 
         //Editar

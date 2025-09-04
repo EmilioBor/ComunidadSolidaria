@@ -54,10 +54,10 @@ namespace Services.Services
         {
             var newDonacion = new Donacion();
 
-            newDonacion.Descripcion = newDonacion.Descripcion;
-            newDonacion.FechaHora = newDonacion.FechaHora;
-            newDonacion.TipoDonacionIdTipoDonacion = newDonacion.TipoDonacionIdTipoDonacion;
-            newDonacion.UsuarioIdUsuario = newDonacion.UsuarioIdUsuario;
+            newDonacion.Descripcion = donacion.Descripcion;
+            newDonacion.FechaHora = donacion.FechaHora;
+            newDonacion.TipoDonacionIdTipoDonacion = donacion.TipoDonacionIdTipoDonacion;
+            newDonacion.UsuarioIdUsuario = donacion.UsuarioIdUsuario;
 
             _context.Donacion.Add(newDonacion);
             await _context.SaveChangesAsync();

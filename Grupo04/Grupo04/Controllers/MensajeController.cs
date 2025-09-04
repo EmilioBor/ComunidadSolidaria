@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newMensaje = await _service.Create(mensajeDtoIn);
 
-            return CreatedAtAction(nameof(GetMensajeById), new { id = newMensaje.Id });
+            return CreatedAtAction(nameof(GetMensajeById), new { id = newMensaje.Id }, newMensaje);
         }
 
         //Editar

@@ -38,11 +38,12 @@ namespace Grupo04.Controllers
 
         //agregar
         [HttpPost("api/v1/agrega/perfil")]
-        public async Task<IActionResult> Create(PerfilDtoIn perfilDtoIn)
+        [RequestSizeLimit(1_000_000)]
+        public async Task<IActionResult> Create([FromForm] PerfilDtoIn perfilDtoIn, IFormFile files)
         {
-            var newPerfil = await _service.Create(perfilDtoIn);
+            var newPerfil = await _service.Create(perfilDtoIn, files);
 
-            return CreatedAtAction(nameof(GetPerfilById), new { id = newPerfil.Id });
+            return CreatedAtAction(nameof(GetPerfilById), new { id = newPerfil.Id }, newPerfil);
         }
 
         //Editar

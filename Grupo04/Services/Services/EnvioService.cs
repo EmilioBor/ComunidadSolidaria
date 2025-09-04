@@ -53,10 +53,10 @@ namespace Services.Services
         {
             var newEnvio = new Envio();
 
-            newEnvio.Direccion = newEnvio.Direccion;
-            newEnvio.FechaEnvio = newEnvio.FechaEnvio;
-            newEnvio.EstadoIdEstado = newEnvio.EstadoIdEstado;
-            newEnvio.LocalidadIdLocalidad = newEnvio.LocalidadIdLocalidad;
+            newEnvio.Direccion = envio.Direccion;
+            newEnvio.FechaEnvio = envio.FechaEnvio;
+            newEnvio.EstadoIdEstado = envio.EstadoIdEstado;
+            newEnvio.LocalidadIdLocalidad = envio.LocalidadIdLocalidad;
 
             _context.Envio.Add(newEnvio);
             await _context.SaveChangesAsync();

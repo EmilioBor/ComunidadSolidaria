@@ -42,7 +42,7 @@ namespace Grupo04.Controllers
         {
             var newEstadoTipo = await _service.Create(estadoTipoDtoIn);
 
-            return CreatedAtAction(nameof(GetEstadoTipoById), new { id = newEstadoTipo.Id });
+            return CreatedAtAction(nameof(GetEstadoTipoById), new { id = newEstadoTipo.Id }, newEstadoTipo);
         }
 
         //Editar

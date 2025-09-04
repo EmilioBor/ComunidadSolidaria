@@ -55,6 +55,9 @@ namespace Services.Services
 
         public async Task<Publicacion> Create(PublicacionDtoIn publicacion)
         {
+
+
+
             var newPublicacion = new Publicacion();
 
             newPublicacion.Descripcion = publicacion.Descripcion;
