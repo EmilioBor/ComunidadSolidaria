@@ -15,6 +15,10 @@ public partial class DetalleDonacion
 
     public int DonacionIdDonacion { get; set; }
 
+    public int DetalleDonacionTipoIdDetalleDonacinoTipo { get; set; }
+
+    public virtual DetalleDonacionTipo DetalleDonacionTipoIdDetalleDonacinoTipoNavigation { get; set; }
+
     public virtual Donacion DonacionIdDonacionNavigation { get; set; }
 
     public virtual Envio EnvioIdEnvioNavigation { get; set; }

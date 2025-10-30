@@ -26,8 +26,8 @@ namespace Services.Services
                 Id = m.Id,
                 Descripcion = m.Descripcion,
                 FechaHora = m.FechaHora,
-                NombreTipoDonacionIdTipoDonacion = m.TipoDonacionIdTipoDonacionNavigation.Descripcion,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombreDonacionTipoIdDonacionTipo = m.DonacionTipoIdDonacionTipoNavigation.Descripcion,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 
             }).ToArrayAsync();
         }
@@ -43,8 +43,8 @@ namespace Services.Services
                 Id = m.Id,
                 Descripcion = m.Descripcion,
                 FechaHora = m.FechaHora,
-                NombreTipoDonacionIdTipoDonacion = m.TipoDonacionIdTipoDonacionNavigation.Descripcion,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombreDonacionTipoIdDonacionTipo = m.DonacionTipoIdDonacionTipoNavigation.Descripcion,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
 
 
             }).SingleOrDefaultAsync();
@@ -56,8 +56,8 @@ namespace Services.Services
 
             newDonacion.Descripcion = donacion.Descripcion;
             newDonacion.FechaHora = donacion.FechaHora;
-            newDonacion.TipoDonacionIdTipoDonacion = donacion.TipoDonacionIdTipoDonacion;
-            newDonacion.UsuarioIdUsuario = donacion.UsuarioIdUsuario;
+            newDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
+            newDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
 
             _context.Donacion.Add(newDonacion);
             await _context.SaveChangesAsync();
@@ -71,8 +71,8 @@ namespace Services.Services
             {
                 existDonacion.Descripcion = donacion.Descripcion;
                 existDonacion.FechaHora = donacion.FechaHora;
-                existDonacion.TipoDonacionIdTipoDonacion = donacion.TipoDonacionIdTipoDonacion;
-                existDonacion.UsuarioIdUsuario = donacion.UsuarioIdUsuario;
+                existDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
+                existDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
 
                 await _context.SaveChangesAsync();
             }

@@ -25,7 +25,7 @@ namespace Services.Services
             {
                 Id = m.Id,
                 NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombrePerfilidPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
             }).ToArrayAsync();
         }
         public async Task<Chat?> GetById (int id)
@@ -39,7 +39,7 @@ namespace Services.Services
             {
                 Id = m.Id,
                 NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombrePerfilidPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
 
             }).SingleOrDefaultAsync();
         }
@@ -49,7 +49,7 @@ namespace Services.Services
             var newChat = new Chat();
 
             newChat.PublicacionIdPublicacion = chat.IdPublicacion;
-            newChat.UsuarioIdUsuario = chat.UsuarioIdUsuario;
+            newChat.PerfilIdPerfil = chat.PerfilidPerfil;
 
             _context.Chat.Add(newChat);
             await _context.SaveChangesAsync();
@@ -62,7 +62,7 @@ namespace Services.Services
             if (existChat != null)
             {
                 existChat.PublicacionIdPublicacion = chat.IdPublicacion;
-                existChat.UsuarioIdUsuario = chat.UsuarioIdUsuario;
+                existChat.PerfilIdPerfil = chat.PerfilidPerfil;
                 await _context.SaveChangesAsync();
             }
 

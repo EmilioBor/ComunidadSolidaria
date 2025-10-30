@@ -27,6 +27,7 @@ namespace Services.Services
                 Descripcion = m.Descripcion,
                 NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
                 NombreEnvioIdEnvio = m.DonacionIdDonacionNavigation.Descripcion,
+                NombreDetalleDonacionTipoIdDetalleDonacinoTipo = m.DetalleDonacionTipoIdDetalleDonacinoTipoNavigation.Nombre,
             }).ToArrayAsync();
         }
         public async Task<DetalleDonacion?> GetById(int id)
@@ -42,6 +43,7 @@ namespace Services.Services
                 Descripcion = m.Descripcion,
                 NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
                 NombreEnvioIdEnvio = m.DonacionIdDonacionNavigation.Descripcion,
+                NombreDetalleDonacionTipoIdDetalleDonacinoTipo = m.DetalleDonacionTipoIdDetalleDonacinoTipoNavigation.Nombre,
 
             }).SingleOrDefaultAsync();
         }
@@ -53,6 +55,7 @@ namespace Services.Services
             newDetalleDonacion.Descripcion = detalleDonacion.Descripcion;
             newDetalleDonacion.DonacionIdDonacion = detalleDonacion.DonacionIdDonacion;
             newDetalleDonacion.EnvioIdEnvio = detalleDonacion.EnvioIdEnvio;
+            newDetalleDonacion.DetalleDonacionTipoIdDetalleDonacinoTipo = detalleDonacion.DetalleDonacionTipoIdDetalleDonacinoTipo;
 
             _context.DetalleDonacion.Add(newDetalleDonacion);
             await _context.SaveChangesAsync();
@@ -67,6 +70,8 @@ namespace Services.Services
                 existDetalleDonacion.Descripcion = detalleDonacion.Descripcion;
                 existDetalleDonacion.DonacionIdDonacion = detalleDonacion.DonacionIdDonacion;
                 existDetalleDonacion.EnvioIdEnvio = detalleDonacion.EnvioIdEnvio;
+                existDetalleDonacion.DetalleDonacionTipoIdDetalleDonacinoTipo = detalleDonacion.DetalleDonacionTipoIdDetalleDonacinoTipo;
+
                 await _context.SaveChangesAsync();
             }
 

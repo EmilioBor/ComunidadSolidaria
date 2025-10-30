@@ -24,8 +24,11 @@ namespace Services.Services
             return await _context.Notificacion.Select(m => new NotificacionDtoOut
             {
                 Id = m.Id,
-                NombreChatIdChat = m.ChatIdChatNavigation.PublicacionIdPublicacionNavigation.Titulo,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                ChatIdChat = m.ChatIdChat,
+                Titulo = m.Titulo,
+                Descripcion = m.Descripcion,
+                NombreNovedadIdNovedad = m.NovedadIdNovedadNavigation.Titulo,
 
             }).ToArrayAsync();
         }
@@ -39,8 +42,11 @@ namespace Services.Services
             return await _context.Notificacion.Where(m => m.Id == id).Select(m => new NotificacionDtoOut
             {
                 Id = m.Id,
-                NombreChatIdChat = m.ChatIdChatNavigation.PublicacionIdPublicacionNavigation.Titulo,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                ChatIdChat = m.ChatIdChat,
+                Titulo = m.Titulo,
+                Descripcion = m.Descripcion,
+                NombreNovedadIdNovedad = m.NovedadIdNovedadNavigation.Titulo,
 
             }).SingleOrDefaultAsync();
         }
@@ -50,7 +56,10 @@ namespace Services.Services
             var newNotificacion = new Notificacion();
 
             newNotificacion.ChatIdChat = notificacion.ChatIdChat;
-            newNotificacion.UsuarioIdUsuario = notificacion.UsuarioIdUsuario;
+            newNotificacion.PerfilIdPerfil = notificacion.PerfilIdPerfil;
+            newNotificacion.Titulo = notificacion.Titulo;
+            newNotificacion.Descripcion = notificacion.Descripcion;
+            newNotificacion.NovedadIdNovedad = notificacion.NovedadIdNovedad;
             
 
             _context.Notificacion.Add(newNotificacion);
@@ -64,8 +73,10 @@ namespace Services.Services
             if (existNotificacion != null)
             {
                 existNotificacion.ChatIdChat = notificacion.ChatIdChat;
-                existNotificacion.UsuarioIdUsuario = notificacion.UsuarioIdUsuario;
-
+                existNotificacion.PerfilIdPerfil = notificacion.PerfilIdPerfil;
+                existNotificacion.Titulo = notificacion.Titulo;
+                existNotificacion.Descripcion = notificacion.Descripcion;
+                existNotificacion.NovedadIdNovedad = notificacion.NovedadIdNovedad;
 
                 await _context.SaveChangesAsync();
             }

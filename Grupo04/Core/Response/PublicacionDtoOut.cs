@@ -20,6 +20,10 @@ namespace Core.Response
 
         public string? NombreLocalidadIdLocalidad { get; set; }
 
-        public string? NombreUsuarioIdUsuario { get; set; }
+        public string? NombrePerfilIdPerfil { get; set; }
+
+        public string? NombrePublicacionTipoIdPublicacionTipo { get; set; }
+
+        public string? NombreDonacionIdDonacion { get; set; }
     }
 }

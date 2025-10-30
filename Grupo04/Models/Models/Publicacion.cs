@@ -19,11 +19,19 @@ public partial class Publicacion
 
     public int LocalidadIdLocalidad { get; set; }
 
-    public int UsuarioIdUsuario { get; set; }
+    public int PerfilIdPerfil { get; set; }
+
+    public int PublicacionTipoIdPublicacionTipo { get; set; }
+
+    public int? DonacionIdDonacion { get; set; }
 
     public virtual ICollection<Chat> Chat { get; set; } = new List<Chat>();
 
+    public virtual Donacion DonacionIdDonacionNavigation { get; set; }
+
     public virtual Localidad LocalidadIdLocalidadNavigation { get; set; }
 
-    public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
+    public virtual Perfil PerfilIdPerfilNavigation { get; set; }
+
+    public virtual PublicacionTipo PublicacionTipoIdPublicacionTipoNavigation { get; set; }
 }

@@ -4,6 +4,7 @@
    "ContextNamespace": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
+   "MinimumProductVersion": "2.6.1186",
    "ModelNamespace": null,
    "OutputContextPath": null,
    "OutputPath": "Models",
@@ -23,7 +24,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "public.DetalleDonacionTipo",
+         "ObjectType": 0
+      },
+      {
          "Name": "public.Donacion",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DonacionTipo",
          "ObjectType": 0
       },
       {
@@ -63,11 +72,11 @@
          "ObjectType": 0
       },
       {
-         "Name": "public.Reporte ",
+         "Name": "public.PublicacionTipo",
          "ObjectType": 0
       },
       {
-         "Name": "public.TipoDonacion",
+         "Name": "public.Reporte ",
          "ObjectType": 0
       },
       {

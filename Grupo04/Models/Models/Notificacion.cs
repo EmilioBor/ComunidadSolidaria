@@ -9,11 +9,19 @@ public partial class Notificacion
 {
     public int Id { get; set; }
 
-    public int UsuarioIdUsuario { get; set; }
+    public int PerfilIdPerfil { get; set; }
 
     public int ChatIdChat { get; set; }
 
+    public string Titulo { get; set; }
+
+    public string Descripcion { get; set; }
+
+    public int NovedadIdNovedad { get; set; }
+
     public virtual Chat ChatIdChatNavigation { get; set; }
 
-    public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
+    public virtual Novedad NovedadIdNovedadNavigation { get; set; }
+
+    public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 }

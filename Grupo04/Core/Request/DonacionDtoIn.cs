@@ -12,9 +12,9 @@ namespace Core.Request
 
         public DateTime? FechaHora { get; set; }
 
-        public int UsuarioIdUsuario { get; set; }
+        public int PerfilIdPerfil { get; set; }
 
-        public int TipoDonacionIdTipoDonacion { get; set; }
+        public int DonacionTipoIdDonacionTipo { get; set; }
 
         public string? Descripcion { get; set; }
     }

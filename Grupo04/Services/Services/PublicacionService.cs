@@ -25,12 +25,14 @@ namespace Services.Services
             return await _context.Publicacion.Select(m => new PublicacionDtoOut
             {
                 Id = m.Id,
-                Descripcion = m.Descripcion,
-                FechaCreacion = m.FechaCreacion,
                 Titulo = m.Titulo,
-                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                Descripcion = m.Descripcion,
                 Imagen = m.Imagen,
+                FechaCreacion = m.FechaCreacion,
+                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
+                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
 
             }).ToArrayAsync();
         }
@@ -44,12 +46,14 @@ namespace Services.Services
             return await _context.Publicacion.Where(m => m.Id == id).Select(m => new PublicacionDtoOut
             {
                 Id = m.Id,
-                Descripcion = m.Descripcion,
-                FechaCreacion = m.FechaCreacion,
                 Titulo = m.Titulo,
-                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                Descripcion = m.Descripcion,
                 Imagen = m.Imagen,
+                FechaCreacion = m.FechaCreacion,
+                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
+                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
 
             }).SingleOrDefaultAsync();
         }
@@ -74,12 +78,14 @@ namespace Services.Services
             }
             var newPublicacion = new Publicacion();
 
-            newPublicacion.Descripcion = publicacion.Descripcion;
-            newPublicacion.FechaCreacion = publicacion.FechaCreacion;
             newPublicacion.Titulo = publicacion.Titulo;
-            newPublicacion.UsuarioIdUsuario = publicacion.UsuarioIdUsuario;
-            newPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
+            newPublicacion.Descripcion = publicacion.Descripcion;
             newPublicacion.Imagen = imageBytes;
+            newPublicacion.FechaCreacion = publicacion.FechaCreacion;
+            newPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
+            newPublicacion.PerfilIdPerfil = publicacion.PerfilIdPerfil;
+            newPublicacion.PublicacionTipoIdPublicacionTipo = publicacion.PublicacionTipoIdPublicacionTipo;
+            newPublicacion.DonacionIdDonacion = publicacion.DonacionIdDonacion;
 
             _context.Publicacion.Add(newPublicacion);
             await _context.SaveChangesAsync();
@@ -91,12 +97,14 @@ namespace Services.Services
             var existPublicacion = await GetById(id);
             if (existPublicacion != null)
             {
-                existPublicacion.Descripcion = publicacion.Descripcion;
-                existPublicacion.FechaCreacion = publicacion.FechaCreacion;
                 existPublicacion.Titulo = publicacion.Titulo;
-                existPublicacion.UsuarioIdUsuario = publicacion.UsuarioIdUsuario;
-                existPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
+                existPublicacion.Descripcion = publicacion.Descripcion;
                 existPublicacion.Imagen = publicacion.Imagen;
+                existPublicacion.FechaCreacion = publicacion.FechaCreacion;
+                existPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
+                existPublicacion.PerfilIdPerfil = publicacion.PerfilIdPerfil;
+                existPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
+                existPublicacion.DonacionIdDonacion = publicacion.DonacionIdDonacion;
 
                 await _context.SaveChangesAsync();
             }

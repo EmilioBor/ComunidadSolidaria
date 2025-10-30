@@ -16,6 +16,6 @@ namespace Core.Request
 
         public int ChatIdChat { get; set; }
 
-        public int UsuarioIdUsuario { get; set; }
+        public int PerfilIdPerfil { get; set; }
     }
 }

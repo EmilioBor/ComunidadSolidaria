@@ -25,9 +25,19 @@ public partial class Perfil
 
     public byte[] Imagen { get; set; }
 
+    public virtual ICollection<Chat> Chat { get; set; } = new List<Chat>();
+
+    public virtual ICollection<Donacion> Donacion { get; set; } = new List<Donacion>();
+
     public virtual Localidad LocalidadIdLocalidadNavigation { get; set; }
 
+    public virtual ICollection<Mensaje> Mensaje { get; set; } = new List<Mensaje>();
+
+    public virtual ICollection<Notificacion> Notificacion { get; set; } = new List<Notificacion>();
+
     public virtual ICollection<Novedad> Novedad { get; set; } = new List<Novedad>();
+
+    public virtual ICollection<Publicacion> Publicacion { get; set; } = new List<Publicacion>();
 
     public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
 }

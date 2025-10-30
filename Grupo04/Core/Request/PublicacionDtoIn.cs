@@ -20,6 +20,10 @@ namespace Core.Request
 
         public int LocalidadIdLocalidad { get; set; }
 
-        public int UsuarioIdUsuario { get; set; }
+        public int PerfilIdPerfil { get; set; }
+
+        public int PublicacionTipoIdPublicacionTipo { get; set; }
+
+        public int? DonacionIdDonacion { get; set; }
     }
 }

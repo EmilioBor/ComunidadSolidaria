@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Request
+namespace Core.Response
 {
-    public class TipoDonacionDtoIn
+    public class DetalleDonacionTipoDtoOut
     {
         public int Id { get; set; }
 
-        public string? Descripcion { get; set; }
+        public string? Nombre { get; set; }
     }
 }

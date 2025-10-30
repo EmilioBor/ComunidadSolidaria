@@ -11,15 +11,17 @@ public partial class Donacion
 
     public DateTime? FechaHora { get; set; }
 
-    public int UsuarioIdUsuario { get; set; }
+    public int PerfilIdPerfil { get; set; }
 
-    public int TipoDonacionIdTipoDonacion { get; set; }
+    public int DonacionTipoIdDonacionTipo { get; set; }
 
     public string Descripcion { get; set; }
 
     public virtual ICollection<DetalleDonacion> DetalleDonacion { get; set; } = new List<DetalleDonacion>();
 
-    public virtual TipoDonacion TipoDonacionIdTipoDonacionNavigation { get; set; }
+    public virtual DonacionTipo DonacionTipoIdDonacionTipoNavigation { get; set; }
 
-    public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
+    public virtual Perfil PerfilIdPerfilNavigation { get; set; }
+
+    public virtual ICollection<Publicacion> Publicacion { get; set; } = new List<Publicacion>();
 }

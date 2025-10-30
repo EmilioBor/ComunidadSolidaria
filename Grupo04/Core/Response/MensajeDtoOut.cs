@@ -16,6 +16,6 @@ namespace Core.Response
 
         public string? NombreChatIdChat { get; set; }
 
-        public string? NombreUsuarioIdUsuario { get; set; }
+        public string? NombrePerfilIdPerfil { get; set; }
     }
 }

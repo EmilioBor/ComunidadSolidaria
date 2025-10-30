@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Request
 {
-    public class DetalleDonacionDtoIn
+    public class DonacionTipoDtoIn
     {
         public int Id { get; set; }
 
         public string? Descripcion { get; set; }
-
-        public int EnvioIdEnvio { get; set; }
-
-        public int DonacionIdDonacion { get; set; }
-
-        public int DetalleDonacionTipoIdDetalleDonacinoTipo {  get; set; }
     }
 }

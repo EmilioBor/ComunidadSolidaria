@@ -5,13 +5,11 @@ using System.Collections.Generic;
 
 namespace Models.Models;
 
-public partial class Usuario
+public partial class DonacionTipo
 {
     public int Id { get; set; }
 
-    public string Email { get; set; }
+    public string Descripcion { get; set; }
 
-    public string Contraseña { get; set; }
-
-    public virtual ICollection<Perfil> Perfil { get; set; } = new List<Perfil>();
+    public virtual ICollection<Donacion> Donacion { get; set; } = new List<Donacion>();
 }

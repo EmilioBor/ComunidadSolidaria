@@ -13,9 +13,9 @@ namespace Core.Response
 
         public DateTime? FechaHora { get; set; }
 
-        public string? NombreUsuarioIdUsuario { get; set; }
+        public string? NombrePerfilIdPerfil { get; set; }
 
-        public string? NombreTipoDonacionIdTipoDonacion { get; set; }
+        public string? NombreDonacionTipoIdDonacionTipo { get; set; }
 
         public string? Descripcion { get; set; }
     }

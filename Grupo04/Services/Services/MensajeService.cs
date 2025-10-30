@@ -27,7 +27,7 @@ namespace Services.Services
                 Contenido = m.Contenido,
                 FechaHora = m.FechaHora,
                 NombreChatIdChat = m.ChatIdChatNavigation.PublicacionIdPublicacionNavigation.Descripcion,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
             }).ToArrayAsync();
         }
         public async Task<Mensaje?> GetById(int id)
@@ -43,7 +43,7 @@ namespace Services.Services
                 Contenido = m.Contenido,
                 FechaHora = m.FechaHora,
                 NombreChatIdChat = m.ChatIdChatNavigation.PublicacionIdPublicacionNavigation.Descripcion,
-                NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
 
             }).SingleOrDefaultAsync();
         }
@@ -55,7 +55,7 @@ namespace Services.Services
             newMensaje.Contenido = mensaje.Contenido;
             newMensaje.FechaHora= mensaje.FechaHora;
             newMensaje.ChatIdChat = mensaje.ChatIdChat;
-            newMensaje.UsuarioIdUsuario= mensaje.UsuarioIdUsuario;
+            newMensaje.PerfilIdPerfil= mensaje.PerfilIdPerfil;
 
             _context.Mensaje.Add(newMensaje);
             await _context.SaveChangesAsync();
@@ -70,7 +70,7 @@ namespace Services.Services
                 existMensaje.Contenido = mensaje.Contenido;
                 existMensaje.FechaHora = mensaje.FechaHora;
                 existMensaje.ChatIdChat = mensaje.ChatIdChat;
-                existMensaje.UsuarioIdUsuario = mensaje.UsuarioIdUsuario;
+                existMensaje.PerfilIdPerfil = mensaje.PerfilIdPerfil;
 
                 await _context.SaveChangesAsync();
             }

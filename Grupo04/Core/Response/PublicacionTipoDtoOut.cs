@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Response
 {
-    public class ChatDtoOut
+    public class PublicacionTipoDtoOut
     {
         public int Id { get; set; }
 
-        public string? NombrePerfilidPerfil { get; set; }
-
-        public string? NombrePublicacionIdPublicacion { get; set; }
+        public string? Nombre { get; set; }
     }
 }

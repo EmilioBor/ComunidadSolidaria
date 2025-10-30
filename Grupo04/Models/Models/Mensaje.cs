@@ -15,9 +15,9 @@ public partial class Mensaje
 
     public int ChatIdChat { get; set; }
 
-    public int UsuarioIdUsuario { get; set; }
+    public int PerfilIdPerfil { get; set; }
 
     public virtual Chat ChatIdChatNavigation { get; set; }
 
-    public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
+    public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 }

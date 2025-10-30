@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Request
 {
-    public class ChatDtoIn
+    public class DetalleDonacionTipoDtoIn
     {
         public int Id { get; set; }
 
-        public int PerfilidPerfil { get; set; }
-
-        public int IdPublicacion { get; set; }
+        public string? Nombre { get; set; }
     }
 }

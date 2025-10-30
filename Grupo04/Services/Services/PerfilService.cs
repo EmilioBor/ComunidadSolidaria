@@ -25,13 +25,13 @@ namespace Services.Services
             return await _context.Perfil.Select(m => new PerfilDtoOut
             {
                 Id = m.Id,
-                Descripcion = m.Descripcion,
-                RazonSocial = m.RazonSocial,
-                Alias = m.Alias,
-                Cbu = m.Cbu,
                 CuitCuil = m.CuitCuil,
-                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                RazonSocial = m.RazonSocial,
+                Descripcion = m.Descripcion,
+                Cbu = m.Cbu,
+                Alias = m.Alias,
                 NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
                 Imagen = m.Imagen,
 
             }).ToArrayAsync();
@@ -46,15 +46,15 @@ namespace Services.Services
             return await _context.Perfil.Where(m => m.Id == id).Select(m => new PerfilDtoOut
             {
                 Id = m.Id,
-                Descripcion = m.Descripcion,
-                RazonSocial = m.RazonSocial,
-                Alias = m.Alias,
-                Cbu = m.Cbu,
                 CuitCuil = m.CuitCuil,
-                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                RazonSocial = m.RazonSocial,
+                Descripcion = m.Descripcion,
+                Cbu = m.Cbu,
+                Alias = m.Alias,
                 NombreUsuarioIdUsuario = m.UsuarioIdUsuarioNavigation.Email,
+                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
                 Imagen = m.Imagen,
-                
+
             }).SingleOrDefaultAsync();
         }
 
@@ -79,11 +79,11 @@ namespace Services.Services
 
             var newPerfil = new Perfil();
 
-            newPerfil.Descripcion = perfil.Descripcion;
-            newPerfil.RazonSocial = perfil.RazonSocial;
-            newPerfil.Alias = perfil.Alias;
-            newPerfil.Cbu = perfil.Cbu;
             newPerfil.CuitCuil = perfil.CuitCuil;
+            newPerfil.RazonSocial = perfil.RazonSocial;
+            newPerfil.Descripcion = perfil.Descripcion;
+            newPerfil.Cbu = perfil.Cbu;
+            newPerfil.Alias = perfil.Alias;
             newPerfil.UsuarioIdUsuario = perfil.UsuarioIdUsuario;
             newPerfil.LocalidadIdLocalidad = perfil.LocalidadIdLocalidad;
             newPerfil.Imagen = imageBytes;
@@ -100,11 +100,11 @@ namespace Services.Services
             {
 
 
-                existPerfil.Descripcion = perfil.Descripcion;
-                existPerfil.RazonSocial = perfil.RazonSocial;
-                existPerfil.Alias = perfil.Alias;
-                existPerfil.Cbu = perfil.Cbu;
                 existPerfil.CuitCuil = perfil.CuitCuil;
+                existPerfil.RazonSocial = perfil.RazonSocial;
+                existPerfil.Descripcion = perfil.Descripcion;
+                existPerfil.Cbu = perfil.Cbu;
+                existPerfil.Alias = perfil.Alias;
                 existPerfil.UsuarioIdUsuario = perfil.UsuarioIdUsuario;
                 existPerfil.LocalidadIdLocalidad = perfil.LocalidadIdLocalidad;
                 existPerfil.Imagen = perfil.Imagen;

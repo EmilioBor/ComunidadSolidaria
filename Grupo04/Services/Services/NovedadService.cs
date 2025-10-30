@@ -25,11 +25,11 @@ namespace Services.Services
             return await _context.Novedad.Select(m => new NovedadDtoOut
             {
                 Id = m.Id,
+                Titulo = m.Titulo,
                 Descripcion = m.Descripcion,    
                 Fecha = m.Fecha,
-                Titulo = m.Titulo,
-                Imagen = m.Imagen,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                Imagen = m.Imagen,
 
             }).ToArrayAsync();
         }
@@ -43,11 +43,11 @@ namespace Services.Services
             return await _context.Novedad.Where(m => m.Id == id).Select(m => new NovedadDtoOut
             {
                 Id = m.Id,
+                Titulo = m.Titulo,
                 Descripcion = m.Descripcion,
                 Fecha = m.Fecha,
-                Titulo = m.Titulo,
-                Imagen = m.Imagen,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                Imagen = m.Imagen,
 
             }).SingleOrDefaultAsync();
         }
@@ -73,11 +73,11 @@ namespace Services.Services
             }
             var newNovedad = new Novedad();
 
+            newNovedad.Titulo = novedad.Titulo;
             newNovedad.Descripcion = novedad.Descripcion;
             newNovedad.Fecha = novedad.Fecha;
-            newNovedad.Titulo = novedad.Titulo;
-            newNovedad.Imagen = imageBytes;
             newNovedad.PerfilIdPerfil = novedad.PerfilIdPerfil;
+            newNovedad.Imagen = imageBytes;
 
 
             _context.Novedad.Add(newNovedad);
@@ -91,9 +91,9 @@ namespace Services.Services
             if (existNovedad != null)
             {
 
+                existNovedad.Titulo = novedad.Titulo;
                 existNovedad.Descripcion = novedad.Descripcion;
                 existNovedad.Fecha = novedad.Fecha;
-                existNovedad.Titulo = novedad.Titulo;
                 existNovedad.Imagen = novedad.Imagen;
                 existNovedad.PerfilIdPerfil = novedad.PerfilIdPerfil;
 
