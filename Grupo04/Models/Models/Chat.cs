@@ -17,7 +17,7 @@ public partial class Chat
 
     public virtual ICollection<Notificacion> Notificacion { get; set; } = new List<Notificacion>();
 
-    public virtual Publicacion PublicacionIdPublicacionNavigation { get; set; }
+    public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 
-    public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
+    public virtual Publicacion PublicacionIdPublicacionNavigation { get; set; }
 }
