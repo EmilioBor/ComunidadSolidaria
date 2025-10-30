@@ -45,7 +45,7 @@ namespace Grupo04.Custom
             var userClaims = new[]
             {
                 new Claim("email", usuario.Email),
-                new Claim("clave", usuario.Contraseña!)
+                new Claim("password", usuario.Password)
             };
 
             var securityKey = new SymmetricSecurityKey(

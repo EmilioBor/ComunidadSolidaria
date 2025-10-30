@@ -9,7 +9,7 @@ public partial class Donacion
 {
     public int Id { get; set; }
 
-    public DateTime? FechaHora { get; set; }
+    public DateTime FechaHora { get; set; }
 
     public int PerfilIdPerfil { get; set; }
 

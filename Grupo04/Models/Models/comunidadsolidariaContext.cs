@@ -406,12 +406,12 @@ public partial class comunidadsolidariaContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasIdentityOptions(null, null, null, 9999999L, null, null)
                 .HasColumnName("id");
-            entity.Property(e => e.Contraseña)
-                .IsRequired()
-                .HasColumnName("contraseña");
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasColumnName("email");
+            entity.Property(e => e.Password)
+                .IsRequired()
+                .HasColumnName("password");
         });
 
         OnModelCreatingPartial(modelBuilder);

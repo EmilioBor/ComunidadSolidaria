@@ -25,7 +25,7 @@ namespace Services.Services
             {
                 Id = m.Id,
                 Email = m.Email,
-                Contraseña = m.Contraseña,
+                Password = m.Password,
 
             }).ToArrayAsync();
         }
@@ -40,7 +40,7 @@ namespace Services.Services
             {
                 Id = m.Id,
                 Email = m.Email,
-                Contraseña = m.Contraseña,
+                Password = m.Password,
 
             }).SingleOrDefaultAsync();
         }
@@ -50,7 +50,7 @@ namespace Services.Services
             var newUsuario = new Usuario();
 
             newUsuario.Email = usuario.Email;
-            newUsuario.Contraseña = usuario.Contraseña;
+            newUsuario.Password = usuario.Password;
 
             _context.Usuario.Add(newUsuario);
             await _context.SaveChangesAsync();
@@ -63,7 +63,7 @@ namespace Services.Services
             if (existUsuario != null)
             {
                 existUsuario.Email = usuario.Email;
-                existUsuario.Contraseña = usuario.Contraseña;
+                existUsuario.Password = usuario.Password;
 
                 await _context.SaveChangesAsync();
             }

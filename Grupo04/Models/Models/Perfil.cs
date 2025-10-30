@@ -9,13 +9,13 @@ public partial class Perfil
 {
     public int Id { get; set; }
 
-    public int CuitCuil { get; set; }
+    public long CuitCuil { get; set; }
 
     public string RazonSocial { get; set; }
 
     public string Descripcion { get; set; }
 
-    public int Cbu { get; set; }
+    public long Cbu { get; set; }
 
     public string Alias { get; set; }
 

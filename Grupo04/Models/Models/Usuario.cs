@@ -11,7 +11,7 @@ public partial class Usuario
 
     public string Email { get; set; }
 
-    public string Contraseña { get; set; }
+    public string Password { get; set; }
 
     public virtual ICollection<Perfil> Perfil { get; set; } = new List<Perfil>();
 }

@@ -6,7 +6,9 @@ using Models.Models;
 
 namespace Grupo04.Controllers
 {
-    public class LoginController : Controller
+    [ApiController] // ✅ Agregá esto
+    [Route("[controller]")] // ✅ Hace que las rutas sean /Login/Login o /Login/Registrarse
+    public class LoginController : ControllerBase // ✅ Usar ControllerBase en APIs
     {
         private readonly comunidadsolidariaContext _context;
         private readonly Utilidades _utilidades;
@@ -16,42 +18,44 @@ namespace Grupo04.Controllers
             _context = context;
             _utilidades = utilidades;
         }
-        [HttpPost]
-        [Route("Registrarse")]
-        public async Task<IActionResult> Registrarse(UsuarioDtoOut usuario)
+
+        // 🔹 REGISTRARSE
+        [HttpPost("Registrarse")]
+        public async Task<IActionResult> Registrarse([FromBody] UsuarioDtoOut usuario)
         {
-            var newregistro = new Usuario
+            if (usuario == null || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Password))
+                return BadRequest(new { message = "Datos inválidos." });
+
+            var newRegistro = new Usuario
             {
                 Email = usuario.Email,
-                Contraseña = _utilidades.EncriptarSHA256(usuario.Contraseña!)
+                Password = _utilidades.EncriptarSHA256(usuario.Password!)
             };
-            await _context.Usuario.AddAsync(newregistro);
+
+            await _context.Usuario.AddAsync(newRegistro);
             await _context.SaveChangesAsync();
 
-            if (newregistro.Id != 0)
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
-            }
+            return Ok(new { isSuccess = newRegistro.Id != 0 });
         }
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> Login(UsuarioDtoOut login)
+
+        // 🔹 LOGIN
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] UsuarioDtoOut login) // ✅ Importante: [FromBody]
         {
-            var usuarioEncontrado = await _context.Usuario.Where(u =>
-                                                                    u.Email == login.Email &&
-                                                                    u.Contraseña == _utilidades.EncriptarSHA256(login.Contraseña!)).FirstOrDefaultAsync();
+            if (login == null || string.IsNullOrEmpty(login.Email) || string.IsNullOrEmpty(login.Password))
+                return BadRequest(new { message = "Email o contraseña inválidos." });
+
+            var passwordEncriptada = _utilidades.EncriptarSHA256(login.Password!);
+
+            var usuarioEncontrado = await _context.Usuario
+                .FirstOrDefaultAsync(u => u.Email == login.Email && u.Password == passwordEncriptada);
+
             if (usuarioEncontrado == null)
             {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false, token = "" });
+                return Ok(new { isSuccess = false, token = "" });
             }
-            else
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = true, token = _utilidades.GenerarJWT(usuarioEncontrado) });
-            }
+
+            return Ok(new { isSuccess = true, token = _utilidades.GenerarJWT(usuarioEncontrado) });
         }
     }
 }
