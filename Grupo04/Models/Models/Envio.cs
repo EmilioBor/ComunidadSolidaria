@@ -13,7 +13,7 @@ public partial class Envio
 
     public int LocalidadIdLocalidad { get; set; }
 
-    public DateTime? FechaEnvio { get; set; }
+    public DateTime FechaEnvio { get; set; }
 
     public int EstadoIdEstado { get; set; }
 

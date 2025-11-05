@@ -13,5 +13,7 @@ public partial class Usuario
 
     public string Password { get; set; }
 
+    public string Rol { get; set; }
+
     public virtual ICollection<Perfil> Perfil { get; set; } = new List<Perfil>();
 }

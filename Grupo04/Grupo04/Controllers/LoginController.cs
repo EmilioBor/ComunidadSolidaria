@@ -21,7 +21,7 @@ namespace Grupo04.Controllers
 
         // 🔹 REGISTRARSE
         [HttpPost("Registrarse")]
-        public async Task<IActionResult> Registrarse([FromBody] UsuarioDtoOut usuario)
+        public async Task<IActionResult> Registrarse( UsuarioDtoOut usuario)
         {
             if (usuario == null || string.IsNullOrEmpty(usuario.Email) || string.IsNullOrEmpty(usuario.Password))
                 return BadRequest(new { message = "Datos inválidos." });
@@ -40,7 +40,7 @@ namespace Grupo04.Controllers
 
         // 🔹 LOGIN
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UsuarioDtoOut login) // ✅ Importante: [FromBody]
+        public async Task<IActionResult> Login( UsuarioDtoOut login) // ✅ Importante: [FromBody]
         {
             if (login == null || string.IsNullOrEmpty(login.Email) || string.IsNullOrEmpty(login.Password))
                 return BadRequest(new { message = "Email o contraseña inválidos." });

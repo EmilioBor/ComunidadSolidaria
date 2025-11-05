@@ -412,6 +412,9 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Password)
                 .IsRequired()
                 .HasColumnName("password");
+            entity.Property(e => e.Rol)
+                .IsRequired()
+                .HasColumnName("rol");
         });
 
         OnModelCreatingPartial(modelBuilder);

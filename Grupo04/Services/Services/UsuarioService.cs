@@ -26,6 +26,7 @@ namespace Services.Services
                 Id = m.Id,
                 Email = m.Email,
                 Password = m.Password,
+                Rol = m.Rol,
 
             }).ToArrayAsync();
         }
@@ -41,6 +42,7 @@ namespace Services.Services
                 Id = m.Id,
                 Email = m.Email,
                 Password = m.Password,
+                Rol = m.Rol,
 
             }).SingleOrDefaultAsync();
         }
@@ -51,6 +53,7 @@ namespace Services.Services
 
             newUsuario.Email = usuario.Email;
             newUsuario.Password = usuario.Password;
+            newUsuario.Rol = usuario.Rol;
 
             _context.Usuario.Add(newUsuario);
             await _context.SaveChangesAsync();
@@ -64,6 +67,7 @@ namespace Services.Services
             {
                 existUsuario.Email = usuario.Email;
                 existUsuario.Password = usuario.Password;
+                existUsuario.Rol= usuario.Rol;
 
                 await _context.SaveChangesAsync();
             }
