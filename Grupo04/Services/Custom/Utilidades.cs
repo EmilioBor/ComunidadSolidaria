@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Models.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -42,27 +43,23 @@ namespace Grupo04.Custom
         // Método para generar un JWT usando la información del usuario
         public string GenerarJWT(Usuario usuario)
         {
-            var userClaims = new[]
-            {
-                new Claim("email", usuario.Email),
-                new Claim("password", usuario.Password)
-            };
+            var claims = new[]
+    {
+        new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
+        new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+        new Claim(ClaimTypes.Role, usuario.Rol ?? "Usuario")
+    };
 
-            var securityKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_configuration["JWT:ClavePrivada"] ?? string.Empty));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:ClavePrivada"] ?? string.Empty));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            // Crear el token con los detalles y configuraciones especificadas
-            var jwtConfig = new JwtSecurityToken(
-                issuer: null,
-                audience: null,
-                claims: userClaims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: credentials
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(12),
+                signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(jwtConfig);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

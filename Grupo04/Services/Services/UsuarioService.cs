@@ -1,5 +1,6 @@
 ﻿using Core.Request;
 using Core.Response;
+using Grupo04.Custom;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Services.Interfaces;
@@ -14,10 +15,11 @@ namespace Services.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly comunidadsolidariaContext _context;
-
-        public UsuarioService(comunidadsolidariaContext context)
+        private readonly Utilidades _utilidades;
+        public UsuarioService(comunidadsolidariaContext context, Utilidades utilidades)
         {
             _context = context;
+            _utilidades = utilidades;
         }
         public async Task<IEnumerable<UsuarioDtoOut>> GetUsuarios()
         {
@@ -47,17 +49,80 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
-        public async Task<Usuario> Create(UsuarioDtoIn usuario)
+        public async Task<UsuarioAuthResponse> Create(UsuarioDtoIn usuario)
         {
-            var newUsuario = new Usuario();
+            // Evitar duplicados
+            var existe = await _context.Usuario.AnyAsync(u => u.Email == usuario.Email);
+            if (existe)
+            {
+                return new UsuarioAuthResponse
+                {
+                    Email = usuario.Email,
+                    EsCorrecto = false
+                };
+            }
 
-            newUsuario.Email = usuario.Email;
-            newUsuario.Password = usuario.Password;
-            newUsuario.Rol = usuario.Rol;
+            var nuevo = new Usuario
+            {
+                Email = usuario.Email,
+                Password = _utilidades.EncriptarSHA256(usuario.Password),
+                Rol = usuario.Rol
+            };
 
-            _context.Usuario.Add(newUsuario);
+            _context.Usuario.Add(nuevo);
             await _context.SaveChangesAsync();
-            return newUsuario;
+
+            // Generar token
+            var token = _utilidades.GenerarJWT(nuevo);
+
+            return new UsuarioAuthResponse
+            {
+                Id = nuevo.Id,
+                Email = nuevo.Email,
+                Token = token,
+                EsCorrecto = true
+            };
+            //var newUsuario = new Usuario();
+
+            //newUsuario.Email = usuario.Email;
+            //newUsuario.Password = usuario.Password;
+            //newUsuario.Rol = usuario.Rol;
+
+            //_context.Usuario.Add(newUsuario);
+            //await _context.SaveChangesAsync();
+            //return newUsuario;
+        }
+        public async Task<UsuarioAuthResponse> Login(string email, string password)
+        {
+            var usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == email);
+            if (usuario == null)
+            {
+                return new UsuarioAuthResponse
+                {
+                    Email = email,
+                    EsCorrecto = false
+                };
+            }
+
+            string passwordEncriptada = _utilidades.EncriptarSHA256(password);
+            if (usuario.Password != passwordEncriptada)
+            {
+                return new UsuarioAuthResponse
+                {
+                    Email = email,
+                    EsCorrecto = false
+                };
+            }
+
+            var token = _utilidades.GenerarJWT(usuario);
+
+            return new UsuarioAuthResponse
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Token = token,
+                EsCorrecto = true
+            };
         }
 
         public async Task Update(int id, UsuarioDtoIn usuario)

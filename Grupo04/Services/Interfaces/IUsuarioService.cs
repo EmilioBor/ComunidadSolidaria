@@ -9,7 +9,8 @@ namespace Services.Interfaces
         Task<IEnumerable<UsuarioDtoOut>> GetUsuarios();
         Task<Usuario?> GetById(int id);
         Task<UsuarioDtoOut?> GetUsuarioDtoById(int id);
-        Task<Usuario> Create(UsuarioDtoIn usuario);
+        Task<UsuarioAuthResponse> Login(string email, string password);
+        Task<UsuarioAuthResponse> Create(UsuarioDtoIn usuario);
         Task Update(int id, UsuarioDtoIn usuario);
         Task Delete(int id);
     }

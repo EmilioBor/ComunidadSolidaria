@@ -116,7 +116,7 @@ builder.Services.AddScoped<IPublicacionService, PublicacionService>();
 builder.Services.AddScoped<IPublicacionTipoService, PublicacionTipoService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
-builder.Services.AddSingleton<Utilidades>();
+builder.Services.AddScoped<Utilidades>();
 
 var app = builder.Build();
 

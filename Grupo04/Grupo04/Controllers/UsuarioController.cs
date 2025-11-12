@@ -1,6 +1,7 @@
 ﻿using Core.Request;
 using Core.Response;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
@@ -17,70 +18,78 @@ namespace Grupo04.Controllers
         }
 
         [HttpGet("api/v1/usuarios")]
-        public async Task<IEnumerable<UsuarioDtoOut>> Usuarios()
+        public async Task<ActionResult<IEnumerable<UsuarioDtoOut>>> Usuarios()
         {
-            return await _service.GetUsuarios();
+            var usuarios = await _service.GetUsuarios();
+            return Ok(usuarios);
         }
 
-        [HttpGet("api/v1/usuario/id/{id}")]
+        [HttpGet("api/v1/usuario/id/{id:int}")]
         public async Task<ActionResult<UsuarioDtoOut>> GetUsuarioById(int id)
         {
             var usuario = await _service.GetUsuarioDtoById(id);
             if (usuario is null)
-            {
-                return NotFound(id);
-            }
-            else
-            {
-                return usuario;
-            }
+                return NotFound(new { mensaje = $"No se encontró un usuario con ID = {id}" });
+
+            return Ok(usuario);
         }
 
         //agregar
         [HttpPost("api/v1/agrega/usuario")]
-        public async Task<IActionResult> Create(UsuarioDtoIn usuarioDtoIn)
+        public async Task<ActionResult<UsuarioAuthResponse>> Create([FromBody]  UsuarioDtoIn usuarioDtoIn)
         {
-            var newUsuario = await _service.Create(usuarioDtoIn);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return CreatedAtAction(nameof(GetUsuarioById), new { id = newUsuario.Id }, newUsuario);
+            var resultado = await _service.Create(usuarioDtoIn);
+
+            if (!resultado.EsCorrecto)
+                return Conflict(new { mensaje = $"El email '{usuarioDtoIn.Email}' ya está registrado." });
+
+            return CreatedAtAction(nameof(GetUsuarioById), new { id = resultado.Id }, resultado);
+        }
+
+        // ✅ Login (valida credenciales y devuelve token)
+        [HttpPost("login")]
+        public async Task<ActionResult<UsuarioAuthResponse>> Login([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var resultado = await _service.Login(request.Email, request.Password);
+
+            if (!resultado.EsCorrecto)
+                return Unauthorized(new { mensaje = "Email o contraseña incorrectos." });
+
+            return Ok(resultado);
         }
 
         //Editar
         [HttpPut("api/v1/editar/{id}")]
-        public async Task<IActionResult> Update(int id, UsuarioDtoIn usuarioDtoIn)
+        public async Task<IActionResult> Update(int id, [FromBody] UsuarioDtoIn usuarioDtoIn)
         {
             if (id != usuarioDtoIn.Id)
-                return BadRequest(new { message = $"El ID = {id} de la URL no coincide con el ID({usuarioDtoIn.Id}) del cuerpo de la solicitud" });
+                return BadRequest(new { mensaje = $"El ID ({id}) de la URL no coincide con el ID ({usuarioDtoIn.Id}) del cuerpo de la solicitud." });
 
-            var usuarioToUpdate = await _service.GetUsuarioDtoById(id);
+            var usuarioExistente = await _service.GetUsuarioDtoById(id);
+            if (usuarioExistente is null)
+                return NotFound(new { mensaje = $"No se encontró un usuario con ID = {id}" });
 
-            if (usuarioToUpdate is not null)
-            {
-                await _service.Update(id, usuarioDtoIn);
-                return NoContent();
-            }
-            else
-            {
-                return NotFound(id);
-            }
-
+            await _service.Update(id, usuarioDtoIn);
+            return NoContent();
         }
+
 
         //ELIMINAr
         [HttpDelete("api/v1/delete/usuario/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var toDelete = await _service.GetUsuarioDtoById(id);
+            var usuario = await _service.GetUsuarioDtoById(id);
+            if (usuario is null)
+                return NotFound(new { mensaje = $"No se encontró un usuario con ID = {id}" });
 
-            if (toDelete is not null)
-            {
-                await _service.Delete(id);
-                return Ok();
-            }
-            else
-            {
-                return NotFound(id);
-            }
+            await _service.Delete(id);
+            return Ok(new { mensaje = $"Usuario con ID = {id} eliminado correctamente." });
         }
     }
 }
