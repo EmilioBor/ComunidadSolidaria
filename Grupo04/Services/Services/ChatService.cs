@@ -24,8 +24,10 @@ namespace Services.Services
             return await _context.Chat.Select(m => new ChatDtoOut
             {
                 Id = m.Id,
-                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
                 NombrePerfilidPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+                NombreReceptorIdReceptor = m.ReceptorIdReceptorNavigation.RazonSocial,
+
             }).ToArrayAsync();
         }
         public async Task<Chat?> GetById (int id)
@@ -38,22 +40,42 @@ namespace Services.Services
             return await _context.Chat.Where(m => m.Id == id).Select(m => new ChatDtoOut
             {
                 Id = m.Id,
-                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
                 NombrePerfilidPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+                NombreReceptorIdReceptor = m.ReceptorIdReceptorNavigation.RazonSocial,
 
             }).SingleOrDefaultAsync();
         }
 
         public async Task<Chat> Create(ChatDtoIn chat)
         {
+            if (chat.PerfilIdPerfil == chat.ReceptorIdReceptor)
+            {
+                throw new ArgumentException("El perfil y el receptor no pueden tener el mismo ID.");
+            }
+
+            var existingChat = await GetExistingChatAsync(chat.PerfilIdPerfil, chat.ReceptorIdReceptor);
+            if (existingChat != null)
+                return existingChat;
+
             var newChat = new Chat();
 
-            newChat.PublicacionIdPublicacion = chat.IdPublicacion;
-            newChat.PerfilIdPerfil = chat.PerfilidPerfil;
+            newChat.PerfilIdPerfil = chat.PerfilIdPerfil;
+            newChat.PublicacionIdPublicacion = chat.PublicacionIdPublicacion;
+            newChat.ReceptorIdReceptor = chat.ReceptorIdReceptor;
 
             _context.Chat.Add(newChat);
             await _context.SaveChangesAsync();
             return newChat;
+        }
+        //Duplicacion de mensaje
+        public async Task<Chat?> GetExistingChatAsync(int perfilId, int receptorId)
+        {
+            return await _context.Chat
+                .FirstOrDefaultAsync(c =>
+                    (c.PerfilIdPerfil == perfilId && c.ReceptorIdReceptor == receptorId) ||
+                    (c.PerfilIdPerfil == receptorId && c.ReceptorIdReceptor == perfilId)
+                );
         }
 
         public async Task Update(int id, ChatDtoIn chat)
@@ -61,8 +83,10 @@ namespace Services.Services
             var existChat = await GetById(id);
             if (existChat != null)
             {
-                existChat.PublicacionIdPublicacion = chat.IdPublicacion;
-                existChat.PerfilIdPerfil = chat.PerfilidPerfil;
+                existChat.PerfilIdPerfil = chat.PerfilIdPerfil;
+                existChat.PublicacionIdPublicacion = chat.PublicacionIdPublicacion;
+                existChat.ReceptorIdReceptor = chat.ReceptorIdReceptor;
+
                 await _context.SaveChangesAsync();
             }
 

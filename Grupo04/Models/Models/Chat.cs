@@ -13,6 +13,8 @@ public partial class Chat
 
     public int PerfilIdPerfil { get; set; }
 
+    public int ReceptorIdReceptor { get; set; }
+
     public virtual ICollection<Mensaje> Mensaje { get; set; } = new List<Mensaje>();
 
     public virtual ICollection<Notificacion> Notificacion { get; set; } = new List<Notificacion>();
@@ -20,4 +22,6 @@ public partial class Chat
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 
     public virtual Publicacion PublicacionIdPublicacionNavigation { get; set; }
+
+    public virtual Perfil ReceptorIdReceptorNavigation { get; set; }
 }

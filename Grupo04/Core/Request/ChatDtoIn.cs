@@ -10,8 +10,10 @@ namespace Core.Request
     {
         public int Id { get; set; }
 
-        public int PerfilidPerfil { get; set; }
+        public int PublicacionIdPublicacion { get; set; }
 
-        public int IdPublicacion { get; set; }
+        public int PerfilIdPerfil { get; set; }
+
+        public int ReceptorIdReceptor { get; set; }
     }
 }

@@ -15,7 +15,7 @@ public partial class Perfil
 
     public string Descripcion { get; set; }
 
-    public long Cbu { get; set; }
+    public decimal Cbu { get; set; }
 
     public string Alias { get; set; }
 
@@ -25,9 +25,13 @@ public partial class Perfil
 
     public byte[] Imagen { get; set; }
 
-    public virtual ICollection<Chat> Chat { get; set; } = new List<Chat>();
+    public virtual ICollection<Chat> ChatPerfilIdPerfilNavigation { get; set; } = new List<Chat>();
 
-    public virtual ICollection<Donacion> Donacion { get; set; } = new List<Donacion>();
+    public virtual ICollection<Chat> ChatReceptorIdReceptorNavigation { get; set; } = new List<Chat>();
+
+    public virtual ICollection<Donacion> DonacionPerfilDonanteIdPerfilDonanteNavigation { get; set; } = new List<Donacion>();
+
+    public virtual ICollection<Donacion> DonacionPerfilIdPerfilNavigation { get; set; } = new List<Donacion>();
 
     public virtual Localidad LocalidadIdLocalidadNavigation { get; set; }
 

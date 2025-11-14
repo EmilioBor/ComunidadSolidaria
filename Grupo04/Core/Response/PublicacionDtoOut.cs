@@ -16,7 +16,7 @@ namespace Core.Response
 
         public byte[]? Imagen { get; set; }
 
-        public DateTime? FechaCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
         public string? NombreLocalidadIdLocalidad { get; set; }
 

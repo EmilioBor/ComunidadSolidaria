@@ -15,17 +15,13 @@ public partial class comunidadsolidariaContext : DbContext
 
     public virtual DbSet<Chat> Chat { get; set; }
 
-    public virtual DbSet<DetalleDonacion> DetalleDonacion { get; set; }
-
-    public virtual DbSet<DetalleDonacionTipo> DetalleDonacionTipo { get; set; }
-
     public virtual DbSet<Donacion> Donacion { get; set; }
 
+    public virtual DbSet<DonacionDetalleEstado> DonacionDetalleEstado { get; set; }
+
+    public virtual DbSet<DonacionEstado> DonacionEstado { get; set; }
+
     public virtual DbSet<DonacionTipo> DonacionTipo { get; set; }
-
-    public virtual DbSet<Envio> Envio { get; set; }
-
-    public virtual DbSet<EstadoTipo> EstadoTipo { get; set; }
 
     public virtual DbSet<Localidad> Localidad { get; set; }
 
@@ -57,8 +53,9 @@ public partial class comunidadsolidariaContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.PerfilIdPerfil).HasColumnName("Perfil_idPerfil");
             entity.Property(e => e.PublicacionIdPublicacion).HasColumnName("Publicacion_idPublicacion");
+            entity.Property(e => e.ReceptorIdReceptor).HasColumnName("Receptor_idReceptor");
 
-            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.Chat)
+            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.ChatPerfilIdPerfilNavigation)
                 .HasForeignKey(d => d.PerfilIdPerfil)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Perfil_idPerfil");
@@ -67,50 +64,11 @@ public partial class comunidadsolidariaContext : DbContext
                 .HasForeignKey(d => d.PublicacionIdPublicacion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Publicacion_idPublicacion");
-        });
 
-        modelBuilder.Entity<DetalleDonacion>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("DetalleDonacion_pkey");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasIdentityOptions(null, null, null, 99999L, null, null)
-                .HasColumnName("id");
-            entity.Property(e => e.Descripcion)
-                .IsRequired()
-                .HasColumnName("descripcion");
-            entity.Property(e => e.DetalleDonacionTipoIdDetalleDonacinoTipo).HasColumnName("DetalleDonacionTipo_idDetalleDonacinoTipo");
-            entity.Property(e => e.DonacionIdDonacion).HasColumnName("Donacion_idDonacion");
-            entity.Property(e => e.EnvioIdEnvio).HasColumnName("Envio_idEnvio");
-
-            entity.HasOne(d => d.DetalleDonacionTipoIdDetalleDonacinoTipoNavigation).WithMany(p => p.DetalleDonacion)
-                .HasForeignKey(d => d.DetalleDonacionTipoIdDetalleDonacinoTipo)
+            entity.HasOne(d => d.ReceptorIdReceptorNavigation).WithMany(p => p.ChatReceptorIdReceptorNavigation)
+                .HasForeignKey(d => d.ReceptorIdReceptor)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DetalleDonacionTipo_idDetalleDonacionTipo");
-
-            entity.HasOne(d => d.DonacionIdDonacionNavigation).WithMany(p => p.DetalleDonacion)
-                .HasForeignKey(d => d.DonacionIdDonacion)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Donacion_idDonacion");
-
-            entity.HasOne(d => d.EnvioIdEnvioNavigation).WithMany(p => p.DetalleDonacion)
-                .HasForeignKey(d => d.EnvioIdEnvio)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Envio_idEnvio");
-        });
-
-        modelBuilder.Entity<DetalleDonacionTipo>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("DetalleDonacionTipo_pkey");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasIdentityOptions(null, null, null, 999999L, null, null)
-                .HasColumnName("id");
-            entity.Property(e => e.Nombre)
-                .IsRequired()
-                .HasColumnName("nombre");
+                .HasConstraintName("Receptor_idReceptor");
         });
 
         modelBuilder.Entity<Donacion>(entity =>
@@ -126,6 +84,7 @@ public partial class comunidadsolidariaContext : DbContext
                 .HasColumnName("descripcion");
             entity.Property(e => e.DonacionTipoIdDonacionTipo).HasColumnName("DonacionTipo_idDonacionTipo");
             entity.Property(e => e.FechaHora).HasColumnName("fechaHora");
+            entity.Property(e => e.PerfilDonanteIdPerfilDonante).HasColumnName("PerfilDonante_idPerfilDonante");
             entity.Property(e => e.PerfilIdPerfil).HasColumnName("Perfil_idPerfil");
 
             entity.HasOne(d => d.DonacionTipoIdDonacionTipoNavigation).WithMany(p => p.Donacion)
@@ -133,10 +92,54 @@ public partial class comunidadsolidariaContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DonacionTipo_idDonacionTipo");
 
-            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.Donacion)
+            entity.HasOne(d => d.PerfilDonanteIdPerfilDonanteNavigation).WithMany(p => p.DonacionPerfilDonanteIdPerfilDonanteNavigation)
+                .HasForeignKey(d => d.PerfilDonanteIdPerfilDonante)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("PerfilDonante_idPerfilDonante");
+
+            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.DonacionPerfilIdPerfilNavigation)
                 .HasForeignKey(d => d.PerfilIdPerfil)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Perfil_idPerfil");
+        });
+
+        modelBuilder.Entity<DonacionDetalleEstado>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("DetalleDonacion_pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasIdentityOptions(null, null, null, 99999L, null, null)
+                .HasColumnName("id");
+            entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+            entity.Property(e => e.Descripcion)
+                .IsRequired()
+                .HasColumnName("descripcion");
+            entity.Property(e => e.DonacionEstadoIdDonacionEstadp).HasColumnName("DonacionEstado_idDonacionEstadp");
+            entity.Property(e => e.DonacionIdDonacion).HasColumnName("Donacion_idDonacion");
+
+            entity.HasOne(d => d.DonacionEstadoIdDonacionEstadpNavigation).WithMany(p => p.DonacionDetalleEstado)
+                .HasForeignKey(d => d.DonacionEstadoIdDonacionEstadp)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DonacionEstado_idDonacionEstado");
+
+            entity.HasOne(d => d.DonacionIdDonacionNavigation).WithMany(p => p.DonacionDetalleEstado)
+                .HasForeignKey(d => d.DonacionIdDonacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Donacion_idDonacion");
+        });
+
+        modelBuilder.Entity<DonacionEstado>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("DetalleDonacionTipo_pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasIdentityOptions(null, null, null, 999999L, null, null)
+                .HasColumnName("id");
+            entity.Property(e => e.Nombre)
+                .IsRequired()
+                .HasColumnName("nombre");
         });
 
         modelBuilder.Entity<DonacionTipo>(entity =>
@@ -150,45 +153,6 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasColumnName("descripcion");
-        });
-
-        modelBuilder.Entity<Envio>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("Envio_pkey");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasIdentityOptions(null, null, null, 99999999L, null, null)
-                .HasColumnName("id");
-            entity.Property(e => e.Direccion)
-                .IsRequired()
-                .HasColumnName("direccion");
-            entity.Property(e => e.EstadoIdEstado).HasColumnName("Estado_idEstado");
-            entity.Property(e => e.FechaEnvio).HasColumnName("fechaEnvio");
-            entity.Property(e => e.LocalidadIdLocalidad).HasColumnName("Localidad_idLocalidad");
-
-            entity.HasOne(d => d.EstadoIdEstadoNavigation).WithMany(p => p.Envio)
-                .HasForeignKey(d => d.EstadoIdEstado)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("EstadoTipo_idEstadoTipo");
-
-            entity.HasOne(d => d.LocalidadIdLocalidadNavigation).WithMany(p => p.Envio)
-                .HasForeignKey(d => d.LocalidadIdLocalidad)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Localidad_idLocalidad");
-        });
-
-        modelBuilder.Entity<EstadoTipo>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("EstadoTipo_pkey");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasIdentityOptions(null, null, null, 99999L, null, null)
-                .HasColumnName("id");
-            entity.Property(e => e.Nombre)
-                .IsRequired()
-                .HasColumnName("nombre");
         });
 
         modelBuilder.Entity<Localidad>(entity =>

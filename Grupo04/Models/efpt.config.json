@@ -4,15 +4,18 @@
    "ContextNamespace": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
-   "MinimumProductVersion": "2.6.1186",
+   "IrregularWords": null,
+   "MinimumProductVersion": "2.6.1224",
    "ModelNamespace": null,
    "OutputContextPath": null,
    "OutputPath": "Models",
+   "PluralRules": null,
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "Models",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 2,
    "SelectedToBeGenerated": 0,
+   "SingularRules": null,
    "T4TemplatePath": null,
    "Tables": [
       {
@@ -20,27 +23,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "public.DetalleDonacion",
-         "ObjectType": 0
-      },
-      {
-         "Name": "public.DetalleDonacionTipo",
-         "ObjectType": 0
-      },
-      {
          "Name": "public.Donacion",
          "ObjectType": 0
       },
       {
+         "Name": "public.DonacionDetalleEstado",
+         "ObjectType": 0
+      },
+      {
+         "Name": "public.DonacionEstado",
+         "ObjectType": 0
+      },
+      {
          "Name": "public.DonacionTipo",
-         "ObjectType": 0
-      },
-      {
-         "Name": "public.Envio",
-         "ObjectType": 0
-      },
-      {
-         "Name": "public.EstadoTipo",
          "ObjectType": 0
       },
       {

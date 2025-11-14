@@ -40,10 +40,20 @@ namespace Grupo04.Controllers
         [HttpPost("api/v1/agrega/chat")]
         public async Task<IActionResult> Create(ChatDtoIn chatDtoIn)
         {
-            var newChat = await _service.Create(chatDtoIn);
+            try
+            {
+                var newChat = await _service.Create(chatDtoIn);
 
-            return CreatedAtAction(nameof(GetChatById), new {id = newChat.Id}, newChat);
+                return CreatedAtAction(nameof(GetChatById), new {id = newChat.Id}, newChat);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { messege = ex.Message });
+            }
+
         }
+
+
 
         //Editar
         [HttpPut("api/v1/editar/{id}")]
