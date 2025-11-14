@@ -2,6 +2,7 @@
 using Core.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.Models;
 using Services.Interfaces;
 
 namespace Grupo04.Controllers
@@ -26,6 +27,21 @@ namespace Grupo04.Controllers
         public async Task<ActionResult<PerfilDtoOut>> GetPerfilById(int id)
         {
             var perfil = await _service.GetPerfilDtoById(id);
+            if (perfil is null)
+            {
+                return NotFound(id);
+            }
+            else
+            {
+                return perfil;
+            }
+        }
+
+        //BBUSCAR PERFIL POR USUARIO
+        [HttpGet("v1/perfil/user/{id}")]
+        public async Task<ActionResult<Perfil>> GetPerfilByUserID(int id)
+        {
+            var perfil = await _service.GetPerfilIdUsuario(id);
             if (perfil is null)
             {
                 return NotFound(id);

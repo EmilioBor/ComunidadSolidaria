@@ -41,6 +41,23 @@ namespace Services.Services
             return await _context.Perfil.FindAsync(id);
         }
 
+        public async Task<Perfil?> GetPerfilIdUsuario(int id)
+        {
+            return await _context.Perfil.Where(m => m.UsuarioIdUsuario == id).Select(m => new Perfil
+            {
+                Id = m.Id,
+                CuitCuil = m.CuitCuil,
+                RazonSocial = m.RazonSocial,
+                Descripcion = m.Descripcion,
+                Cbu = m.Cbu,
+                Alias = m.Alias,
+                UsuarioIdUsuario = m.UsuarioIdUsuario,
+                LocalidadIdLocalidad = m.LocalidadIdLocalidad,
+                Imagen = m.Imagen,
+
+            }).SingleOrDefaultAsync();
+        }
+
         public async Task<PerfilDtoOut?> GetPerfilDtoById(int id)
         {
             return await _context.Perfil.Where(m => m.Id == id).Select(m => new PerfilDtoOut
