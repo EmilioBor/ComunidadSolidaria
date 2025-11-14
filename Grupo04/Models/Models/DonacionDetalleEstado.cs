@@ -15,9 +15,9 @@ public partial class DonacionDetalleEstado
 
     public int Cantidad { get; set; }
 
-    public int DonacionEstadoIdDonacionEstadp { get; set; }
+    public int DonacionEstadoIdDonacionEstado { get; set; }
 
-    public virtual DonacionEstado DonacionEstadoIdDonacionEstadpNavigation { get; set; }
+    public virtual DonacionEstado DonacionEstadoIdDonacionEstadoNavigation { get; set; }
 
     public virtual Donacion DonacionIdDonacionNavigation { get; set; }
 }

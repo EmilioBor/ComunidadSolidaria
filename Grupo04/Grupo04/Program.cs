@@ -100,12 +100,10 @@ option.UseNpgsql(builder.Configuration.GetConnectionString("Conection")));
 
 //Services
 builder.Services.AddScoped<IChatServer,ChatService>();
-builder.Services.AddScoped<IDetalleDonacionService,DetalleDonacionService>();
-builder.Services.AddScoped<IDetalleDonacionTipoService,DetalleDonacionTipoService>();
+builder.Services.AddScoped<IDonacionDetalleEstadoService,DonacionDetalleEstadoService>();
+builder.Services.AddScoped<IDonacionEstadoService,DonacionEstadoService>();
 builder.Services.AddScoped<IDonacionService, DonacionService>();
 builder.Services.AddScoped<IDonacionTipoService, DonacionTipoService>();
-builder.Services.AddScoped<IEnvioServer,EnvioService>();
-builder.Services.AddScoped<IEstadoTipoServer,EstadoTipoService>();
 builder.Services.AddScoped<ILocalidadService,LocalidadService>();
 builder.Services.AddScoped<IMensajeService,MensajeService>();
 builder.Services.AddScoped<INotificacionService,NotificacionService>();

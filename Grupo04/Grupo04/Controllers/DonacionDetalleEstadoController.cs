@@ -10,22 +10,22 @@ namespace Grupo04.Controllers
     [ApiController]
     public class DetalleDonacionController : ControllerBase
     {
-        private readonly IDetalleDonacionService _service;
-        public DetalleDonacionController(IDetalleDonacionService service)
+        private readonly IDonacionDetalleEstadoService _service;
+        public DetalleDonacionController(IDonacionDetalleEstadoService service)
         {
             _service = service;
         }
 
         [HttpGet("api/v1/detalleDonacions")]
-        public async Task<IEnumerable<DetalleDonacionDtoOut>> DetalleDonacions()
+        public async Task<IEnumerable<DonacionDetalleEstadoDtoOut>> DetalleDonacions()
         {
-            return await _service.GetDetalleDonacions();
+            return await _service.GetDonacionDetalleEstados();
         }
 
         [HttpGet("api/v1/detalleDonacion/id/{id}")]
-        public async Task<ActionResult<DetalleDonacionDtoOut>> GetDetalleDonacionById(int id)
+        public async Task<ActionResult<DonacionDetalleEstadoDtoOut>> GetDetalleDonacionById(int id)
         {
-            var detalleDonacion = await _service.GetDetalleDonacionDtoById(id);
+            var detalleDonacion = await _service.GetDonacionDetalleEstadoDtoById(id);
             if (detalleDonacion is null)
             {
                 return NotFound(id);
@@ -38,7 +38,7 @@ namespace Grupo04.Controllers
 
         //agregar
         [HttpPost("api/v1/agrega/detalleDonacion")]
-        public async Task<IActionResult> Create(DetalleDonacionDtoIn detalleDonacionDtoIn)
+        public async Task<IActionResult> Create(DonacionDetalleEstadoDtoIn detalleDonacionDtoIn)
         {
             var newDetalleDonacion = await _service.Create(detalleDonacionDtoIn);
 
@@ -47,12 +47,12 @@ namespace Grupo04.Controllers
 
         //Editar
         [HttpPut("api/v1/editar/{id}")]
-        public async Task<IActionResult> Update(int id, DetalleDonacionDtoIn detalleDonacionDtoIn)
+        public async Task<IActionResult> Update(int id, DonacionDetalleEstadoDtoIn detalleDonacionDtoIn)
         {
             if (id != detalleDonacionDtoIn.Id)
                 return BadRequest(new { message = $"El ID = {id} de la URL no coincide con el ID({detalleDonacionDtoIn.Id}) del cuerpo de la solicitud" });
 
-            var detalleDonacionToUpdate = await _service.GetDetalleDonacionDtoById(id);
+            var detalleDonacionToUpdate = await _service.GetDonacionDetalleEstadoDtoById(id);
 
             if (detalleDonacionToUpdate is not null)
             {
@@ -70,7 +70,7 @@ namespace Grupo04.Controllers
         [HttpDelete("api/v1/delete/detalleDonacion/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var toDelete = await _service.GetDetalleDonacionDtoById(id);
+            var toDelete = await _service.GetDonacionDetalleEstadoDtoById(id);
 
             if (toDelete is not null)
             {

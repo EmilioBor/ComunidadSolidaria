@@ -28,6 +28,7 @@ namespace Services.Services
                 FechaHora = m.FechaHora,
                 NombreDonacionTipoIdDonacionTipo = m.DonacionTipoIdDonacionTipoNavigation.Descripcion,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePerfilDonanteIdPerfilDonante = m.PerfilDonanteIdPerfilDonanteNavigation.RazonSocial,
                 
             }).ToArrayAsync();
         }
@@ -45,7 +46,7 @@ namespace Services.Services
                 FechaHora = m.FechaHora,
                 NombreDonacionTipoIdDonacionTipo = m.DonacionTipoIdDonacionTipoNavigation.Descripcion,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
-
+                NombrePerfilDonanteIdPerfilDonante = m.PerfilDonanteIdPerfilDonanteNavigation.RazonSocial,
 
             }).SingleOrDefaultAsync();
         }
@@ -58,6 +59,7 @@ namespace Services.Services
             newDonacion.FechaHora = donacion.FechaHora;
             newDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
             newDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
+            newDonacion.PerfilDonanteIdPerfilDonante= donacion.PerfilDonanteIdPerfilDonante;
 
             _context.Donacion.Add(newDonacion);
             await _context.SaveChangesAsync();
@@ -73,6 +75,7 @@ namespace Services.Services
                 existDonacion.FechaHora = donacion.FechaHora;
                 existDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
                 existDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
+                existDonacion.PerfilDonanteIdPerfilDonante = donacion.PerfilDonanteIdPerfilDonante;
 
                 await _context.SaveChangesAsync();
             }

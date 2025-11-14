@@ -15,7 +15,7 @@ public partial class Perfil
 
     public string Descripcion { get; set; }
 
-    public decimal Cbu { get; set; }
+    public long Cbu { get; set; }
 
     public string Alias { get; set; }
 

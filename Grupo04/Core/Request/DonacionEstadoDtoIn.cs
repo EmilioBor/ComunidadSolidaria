@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Request
 {
-    public class EstadoTipoDtoIn
+    public class DonacionEstadoDtoIn
     {
         public int Id { get; set; }
 

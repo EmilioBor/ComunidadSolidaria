@@ -8,22 +8,22 @@ namespace Grupo04.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DetalleDonacionTipoController : ControllerBase
+    public class DonacionEstadoController : ControllerBase
     {
-        private readonly IDetalleDonacionTipoService _service;
-        public DetalleDonacionTipoController(IDetalleDonacionTipoService service)
+        private readonly IDonacionEstadoService _service;
+        public DonacionEstadoController(IDonacionEstadoService service)
         {
             _service = service;
         }
 
         [HttpGet("api/v1/detalleDonacionTipos")]
-        public async Task<IEnumerable<DetalleDonacionTipoDtoOut>> DetalleDonacionTipos()
+        public async Task<IEnumerable<DonacionEstadoDtoOut>> DetalleDonacionTipos()
         {
-            return await _service.GetDetalleDonacionTipoAll();
+            return await _service.GetDonacionEstadoAll();
         }
 
         [HttpGet("api/v1/detalleDonacionTipo/id/{id}")]
-        public async Task<ActionResult<DetalleDonacionTipoDtoOut>> GetDetalleDonacionTipoById(int id)
+        public async Task<ActionResult<DonacionEstadoDtoOut>> GetDetalleDonacionTipoById(int id)
         {
             var detalleDonacionTipo = await _service.GetetalleDonacionTipoDtoById(id);
             if (detalleDonacionTipo is null)
@@ -38,7 +38,7 @@ namespace Grupo04.Controllers
 
         //agregar
         [HttpPost("api/v1/agrega/detalleDonacionTipo")]
-        public async Task<IActionResult> Create(DetalleDonacionTipoDtoIn detalleDonacionTipoDtoIn)
+        public async Task<IActionResult> Create(DonacionEstadoDtoIn detalleDonacionTipoDtoIn)
         {
             var newDetalleDonacionTipo = await _service.Create(detalleDonacionTipoDtoIn);
 

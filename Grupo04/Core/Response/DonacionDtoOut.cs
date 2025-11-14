@@ -11,12 +11,13 @@ namespace Core.Response
     {
         public int Id { get; set; }
 
-        public DateTime? FechaHora { get; set; }
+        public DateTime FechaHora { get; set; }
 
         public string? NombrePerfilIdPerfil { get; set; }
 
         public string? NombreDonacionTipoIdDonacionTipo { get; set; }
 
         public string? Descripcion { get; set; }
+        public string? NombrePerfilDonanteIdPerfilDonante {  get; set; }
     }
 }

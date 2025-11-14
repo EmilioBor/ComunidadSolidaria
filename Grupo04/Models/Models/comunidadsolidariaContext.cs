@@ -115,11 +115,11 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasColumnName("descripcion");
-            entity.Property(e => e.DonacionEstadoIdDonacionEstadp).HasColumnName("DonacionEstado_idDonacionEstadp");
+            entity.Property(e => e.DonacionEstadoIdDonacionEstado).HasColumnName("DonacionEstado_idDonacionEstado");
             entity.Property(e => e.DonacionIdDonacion).HasColumnName("Donacion_idDonacion");
 
-            entity.HasOne(d => d.DonacionEstadoIdDonacionEstadpNavigation).WithMany(p => p.DonacionDetalleEstado)
-                .HasForeignKey(d => d.DonacionEstadoIdDonacionEstadp)
+            entity.HasOne(d => d.DonacionEstadoIdDonacionEstadoNavigation).WithMany(p => p.DonacionDetalleEstado)
+                .HasForeignKey(d => d.DonacionEstadoIdDonacionEstado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DonacionEstado_idDonacionEstado");
 
