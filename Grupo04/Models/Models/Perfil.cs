@@ -44,4 +44,6 @@ public partial class Perfil
     public virtual ICollection<Publicacion> Publicacion { get; set; } = new List<Publicacion>();
 
     public virtual Usuario UsuarioIdUsuarioNavigation { get; set; }
+
+    public virtual ICollection<UsuarioReporte> UsuarioReporte { get; set; } = new List<UsuarioReporte>();
 }

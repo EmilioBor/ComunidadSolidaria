@@ -41,6 +41,8 @@ public partial class comunidadsolidariaContext : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
+    public virtual DbSet<UsuarioReporte> UsuarioReporte { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Chat>(entity =>
@@ -379,6 +381,35 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Rol)
                 .IsRequired()
                 .HasColumnName("rol");
+        });
+
+        modelBuilder.Entity<UsuarioReporte>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Reporte _pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasIdentityOptions(null, null, null, 999999L, null, null)
+                .HasColumnName("id");
+            entity.Property(e => e.Descripcion)
+                .IsRequired()
+                .HasColumnName("descripcion");
+            entity.Property(e => e.FechaHora).HasColumnName("fechaHora");
+            entity.Property(e => e.Motivo)
+                .IsRequired()
+                .HasColumnName("motivo");
+            entity.Property(e => e.PerfilIdPerfil).HasColumnName("Perfil_idPerfil");
+            entity.Property(e => e.PublicacionIdPublicacion).HasColumnName("Publicacion_idPublicacion");
+
+            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.UsuarioReporte)
+                .HasForeignKey(d => d.PerfilIdPerfil)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Perfil_idPerfil");
+
+            entity.HasOne(d => d.PublicacionIdPublicacionNavigation).WithMany(p => p.UsuarioReporte)
+                .HasForeignKey(d => d.PublicacionIdPublicacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Publicacion_idPublicacion");
         });
 
         OnModelCreatingPartial(modelBuilder);

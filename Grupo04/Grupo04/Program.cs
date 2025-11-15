@@ -112,6 +112,7 @@ builder.Services.AddScoped<IPerfilService, PerfilService>();
 builder.Services.AddScoped<IProvinciaService, ProvinciaService>();
 builder.Services.AddScoped<IPublicacionService, PublicacionService>();
 builder.Services.AddScoped<IPublicacionTipoService, PublicacionTipoService>();
+builder.Services.AddScoped<IUsuarioReporte, UsuarioReporteService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddScoped<Utilidades>();

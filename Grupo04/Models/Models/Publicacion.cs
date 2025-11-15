@@ -34,4 +34,6 @@ public partial class Publicacion
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 
     public virtual PublicacionTipo PublicacionTipoIdPublicacionTipoNavigation { get; set; }
+
+    public virtual ICollection<UsuarioReporte> UsuarioReporte { get; set; } = new List<UsuarioReporte>();
 }

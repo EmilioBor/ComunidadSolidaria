@@ -71,11 +71,11 @@
          "ObjectType": 0
       },
       {
-         "Name": "public.Reporte ",
+         "Name": "public.Usuario",
          "ObjectType": 0
       },
       {
-         "Name": "public.Usuario",
+         "Name": "public.UsuarioReporte",
          "ObjectType": 0
       }
    ],
