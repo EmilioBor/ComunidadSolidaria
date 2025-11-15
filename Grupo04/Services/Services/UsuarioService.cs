@@ -79,18 +79,11 @@ namespace Services.Services
             {
                 Id = nuevo.Id,
                 Email = nuevo.Email,
+                Rol = nuevo.Rol,
                 Token = token,
                 EsCorrecto = true
             };
-            //var newUsuario = new Usuario();
-
-            //newUsuario.Email = usuario.Email;
-            //newUsuario.Password = usuario.Password;
-            //newUsuario.Rol = usuario.Rol;
-
-            //_context.Usuario.Add(newUsuario);
-            //await _context.SaveChangesAsync();
-            //return newUsuario;
+            
         }
         public async Task<UsuarioAuthResponse> Login(string email, string password)
         {
@@ -121,6 +114,7 @@ namespace Services.Services
                 Id = usuario.Id,
                 Email = usuario.Email,
                 Token = token,
+                Rol = usuario.Rol,
                 EsCorrecto = true
             };
         }
