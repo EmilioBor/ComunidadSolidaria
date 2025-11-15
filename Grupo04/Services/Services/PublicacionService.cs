@@ -58,6 +58,41 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<PublicacionDtoOut>> GetPublicacionDtoByPerfil(string name)
+        {
+            return await _context.Publicacion.Where(m => m.PerfilIdPerfilNavigation.RazonSocial == name).Select(m => new PublicacionDtoOut
+            {
+                Id = m.Id,
+                Titulo = m.Titulo,
+                Descripcion = m.Descripcion,
+                Imagen = m.Imagen,
+                FechaCreacion = m.FechaCreacion,
+                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
+                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+
+            }).ToArrayAsync();
+        }
+
+
+        public async Task<IEnumerable<PublicacionDtoOut>> GetPublicacionDtoByTipoPubli(string name)
+        {
+            return await _context.Publicacion.Where(m => m.PublicacionTipoIdPublicacionTipoNavigation.Nombre == name).Select(m => new PublicacionDtoOut
+            {
+                Id = m.Id,
+                Titulo = m.Titulo,
+                Descripcion = m.Descripcion,
+                Imagen = m.Imagen,
+                FechaCreacion = m.FechaCreacion,
+                NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
+                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+
+            }).ToArrayAsync();
+        }
+
         public async Task<Publicacion> Create(PublicacionDtoIn publicacion, IFormFile files )
         {
             if (files == null || files.Length == 0)

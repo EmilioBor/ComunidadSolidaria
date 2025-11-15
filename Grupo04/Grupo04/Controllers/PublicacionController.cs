@@ -36,6 +36,36 @@ namespace Grupo04.Controllers
             }
         }
 
+        [HttpGet("api/v1/publicacion/perfil/{name}")]
+        public async Task<ActionResult<PublicacionDtoOut[]>> GetPublicacionById(string name)
+        {
+            var publicaciones = await _service.GetPublicacionDtoByPerfil(name);
+
+            if (publicaciones == null )
+            {
+                return NotFound($"No se encontraron publicaciones para el perfil: {name}");
+            }
+
+            return Ok(publicaciones);
+        }
+
+        [HttpGet("api/v1/publicacion/tipopublicacion/{name}")]
+        public async Task<ActionResult<PublicacionDtoOut[]>> GetPublicacionDtoByTipoPubli(string name)
+        {
+            var publicaciones = await _service.GetPublicacionDtoByTipoPubli(name);
+
+            if (publicaciones == null )
+            {
+                return NotFound($"No se encontraron publicaciones para el tipo: {name}");
+            }
+
+            return Ok(publicaciones);
+        }
+
+
+
+
+
         //agregar
         [HttpPost("api/v1/agrega/publicacion")]
         [RequestSizeLimit(1_000_000)]
