@@ -22,7 +22,9 @@ namespace Services.Services
         }
         public async Task<IEnumerable<PublicacionDtoOut>> GetPublicacions()
         {
-            return await _context.Publicacion.Select(m => new PublicacionDtoOut
+            return await _context.Publicacion
+                .OrderByDescending(m => m.FechaCreacion)
+                .Select(m => new PublicacionDtoOut
             {
                 Id = m.Id,
                 Titulo = m.Titulo,
@@ -116,7 +118,7 @@ namespace Services.Services
             newPublicacion.Titulo = publicacion.Titulo;
             newPublicacion.Descripcion = publicacion.Descripcion;
             newPublicacion.Imagen = imageBytes;
-            newPublicacion.FechaCreacion = publicacion.FechaCreacion;
+            newPublicacion.FechaCreacion = DateTime.UtcNow;
             newPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
             newPublicacion.PerfilIdPerfil = publicacion.PerfilIdPerfil;
             newPublicacion.PublicacionTipoIdPublicacionTipo = publicacion.PublicacionTipoIdPublicacionTipo;

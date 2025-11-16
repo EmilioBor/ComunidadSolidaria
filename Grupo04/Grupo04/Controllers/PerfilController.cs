@@ -52,6 +52,22 @@ namespace Grupo04.Controllers
             }
         }
 
+
+        //BBUSCAR PERFIL POR nombre
+        [HttpGet("v1/perfil/nombre/{nombre}")]
+        public async Task<ActionResult<Perfil>> GetPerfilByNombre(string nombre)
+        {
+            var perfil = await _service.GetPerfilIdNombre(nombre);
+            if (perfil is null)
+            {
+                return NotFound(nombre);
+            }
+            else
+            {
+                return perfil;
+            }
+        }
+
         //agregar
         [HttpPost("api/v1/agrega/perfil")]
         [RequestSizeLimit(1_000_000)]

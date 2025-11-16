@@ -14,5 +14,6 @@ namespace Services.Interfaces
         Task<Perfil> Create(PerfilDtoIn perfil, IFormFile files);
         Task Update(int id, PerfilDtoIn perfil);
         Task Delete(int id);
+        Task<Perfil?> GetPerfilIdNombre(string nombre);
     }
 }

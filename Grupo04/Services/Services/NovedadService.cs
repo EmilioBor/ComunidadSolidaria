@@ -22,7 +22,9 @@ namespace Services.Services
         }
         public async Task<IEnumerable<NovedadDtoOut>> GetNovedads()
         {
-            return await _context.Novedad.Select(m => new NovedadDtoOut
+            return await _context.Novedad
+                .OrderByDescending(m => m.Fecha)
+                .Select(m => new NovedadDtoOut
             {
                 Id = m.Id,
                 Titulo = m.Titulo,

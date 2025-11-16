@@ -58,6 +58,25 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
+
+        public async Task<Perfil?> GetPerfilIdNombre(string nombre)
+        {
+            return await _context.Perfil.Where(m => m.RazonSocial == nombre).Select(m => new Perfil
+            {
+                Id = m.Id,
+                CuitCuil = m.CuitCuil,
+                RazonSocial = m.RazonSocial,
+                Descripcion = m.Descripcion,
+                Cbu = m.Cbu,
+                Alias = m.Alias,
+                UsuarioIdUsuario = m.UsuarioIdUsuario,
+                LocalidadIdLocalidad = m.LocalidadIdLocalidad,
+                Imagen = m.Imagen,
+
+            }).SingleOrDefaultAsync();
+        }
+
+
         public async Task<PerfilDtoOut?> GetPerfilDtoById(int id)
         {
             return await _context.Perfil.Where(m => m.Id == id).Select(m => new PerfilDtoOut
