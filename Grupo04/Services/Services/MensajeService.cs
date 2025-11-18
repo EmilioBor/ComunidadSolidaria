@@ -85,5 +85,37 @@ namespace Services.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<Mensaje> SendMessage(MensajeDtoIn dto)
+        {
+            var message = new Mensaje
+            {
+                ChatIdChat = dto.ChatIdChat,
+                PerfilIdPerfil = dto.PerfilIdPerfil, // quien envía
+                Contenido = dto.Contenido,
+                FechaHora = DateTime.UtcNow
+            };
+
+            _context.Mensaje.Add(message);
+            await _context.SaveChangesAsync();
+
+            return message;
+        }
+
+        public async Task<IEnumerable<MensajeDtoOut>> GetMessages(int chatId)
+        {
+            return await _context.Mensaje
+                .Where(m => m.ChatIdChat == chatId)
+                .OrderBy(m => m.FechaHora)
+                .Select(m => new MensajeDtoOut
+                {
+                    Id = m.Id,
+                    NombreChatIdChat = m.ChatIdChatNavigation.PublicacionIdPublicacionNavigation.Titulo,
+                    NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,//quien envía
+                    Contenido = m.Contenido,
+                    FechaHora = DateTime.UtcNow
+                }).ToListAsync();
+        }
+
     }
 }

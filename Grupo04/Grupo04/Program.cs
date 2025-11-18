@@ -117,6 +117,8 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddScoped<Utilidades>();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -127,6 +129,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("_myAlloeSpecificOrigins");
+
+app.MapHub<ChatHub>("/chatHub");
+
 
 app.UseHttpsRedirection();
 
