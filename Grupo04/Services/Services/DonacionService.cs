@@ -29,7 +29,8 @@ namespace Services.Services
                 NombreDonacionTipoIdDonacionTipo = m.DonacionTipoIdDonacionTipoNavigation.Descripcion,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 NombrePerfilDonanteIdPerfilDonante = m.PerfilDonanteIdPerfilDonanteNavigation.RazonSocial,
-                
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+
             }).ToArrayAsync();
         }
         public async Task<Donacion?> GetById(int id)
@@ -47,6 +48,7 @@ namespace Services.Services
                 NombreDonacionTipoIdDonacionTipo = m.DonacionTipoIdDonacionTipoNavigation.Descripcion,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 NombrePerfilDonanteIdPerfilDonante = m.PerfilDonanteIdPerfilDonanteNavigation.RazonSocial,
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
 
             }).SingleOrDefaultAsync();
         }
@@ -60,6 +62,7 @@ namespace Services.Services
             newDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
             newDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
             newDonacion.PerfilDonanteIdPerfilDonante= donacion.PerfilDonanteIdPerfilDonante;
+            newDonacion.PublicacionIdPublicacion= donacion.PublicacionIdPublicacion;
 
             _context.Donacion.Add(newDonacion);
             await _context.SaveChangesAsync();
@@ -76,6 +79,8 @@ namespace Services.Services
                 existDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
                 existDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
                 existDonacion.PerfilDonanteIdPerfilDonante = donacion.PerfilDonanteIdPerfilDonante;
+                existDonacion.PublicacionIdPublicacion = donacion?.PublicacionIdPublicacion;
+
 
                 await _context.SaveChangesAsync();
             }

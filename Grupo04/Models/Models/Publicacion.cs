@@ -23,11 +23,9 @@ public partial class Publicacion
 
     public int PublicacionTipoIdPublicacionTipo { get; set; }
 
-    public int? DonacionIdDonacion { get; set; }
-
     public virtual ICollection<Chat> Chat { get; set; } = new List<Chat>();
 
-    public virtual Donacion DonacionIdDonacionNavigation { get; set; }
+    public virtual ICollection<Donacion> Donacion { get; set; } = new List<Donacion>();
 
     public virtual Localidad LocalidadIdLocalidadNavigation { get; set; }
 

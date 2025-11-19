@@ -19,6 +19,8 @@ public partial class Donacion
 
     public int PerfilDonanteIdPerfilDonante { get; set; }
 
+    public int? PublicacionIdPublicacion { get; set; }
+
     public virtual ICollection<DonacionDetalleEstado> DonacionDetalleEstado { get; set; } = new List<DonacionDetalleEstado>();
 
     public virtual DonacionTipo DonacionTipoIdDonacionTipoNavigation { get; set; }
@@ -27,5 +29,5 @@ public partial class Donacion
 
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 
-    public virtual ICollection<Publicacion> Publicacion { get; set; } = new List<Publicacion>();
+    public virtual Publicacion PublicacionIdPublicacionNavigation { get; set; }
 }

@@ -88,6 +88,7 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.FechaHora).HasColumnName("fechaHora");
             entity.Property(e => e.PerfilDonanteIdPerfilDonante).HasColumnName("PerfilDonante_idPerfilDonante");
             entity.Property(e => e.PerfilIdPerfil).HasColumnName("Perfil_idPerfil");
+            entity.Property(e => e.PublicacionIdPublicacion).HasColumnName("Publicacion_idPublicacion");
 
             entity.HasOne(d => d.DonacionTipoIdDonacionTipoNavigation).WithMany(p => p.Donacion)
                 .HasForeignKey(d => d.DonacionTipoIdDonacionTipo)
@@ -103,6 +104,10 @@ public partial class comunidadsolidariaContext : DbContext
                 .HasForeignKey(d => d.PerfilIdPerfil)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Perfil_idPerfil");
+
+            entity.HasOne(d => d.PublicacionIdPublicacionNavigation).WithMany(p => p.Donacion)
+                .HasForeignKey(d => d.PublicacionIdPublicacion)
+                .HasConstraintName("Publicacion_idPublicacion");
         });
 
         modelBuilder.Entity<DonacionDetalleEstado>(entity =>
@@ -321,7 +326,6 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasColumnName("descripcion");
-            entity.Property(e => e.DonacionIdDonacion).HasColumnName("Donacion_idDonacion");
             entity.Property(e => e.FechaCreacion).HasColumnName("fechaCreacion");
             entity.Property(e => e.Imagen).HasColumnName("imagen");
             entity.Property(e => e.LocalidadIdLocalidad).HasColumnName("Localidad_idLocalidad");
@@ -330,10 +334,6 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Titulo)
                 .IsRequired()
                 .HasColumnName("titulo");
-
-            entity.HasOne(d => d.DonacionIdDonacionNavigation).WithMany(p => p.Publicacion)
-                .HasForeignKey(d => d.DonacionIdDonacion)
-                .HasConstraintName("Donacion_idDonacion");
 
             entity.HasOne(d => d.LocalidadIdLocalidadNavigation).WithMany(p => p.Publicacion)
                 .HasForeignKey(d => d.LocalidadIdLocalidad)

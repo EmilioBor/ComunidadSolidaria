@@ -34,7 +34,7 @@ namespace Services.Services
                 NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
-                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+                
 
             }).ToArrayAsync();
         }
@@ -55,7 +55,7 @@ namespace Services.Services
                 NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
-                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+                
 
             }).SingleOrDefaultAsync();
         }
@@ -72,7 +72,7 @@ namespace Services.Services
                 NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
-                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+                
 
             }).ToArrayAsync();
         }
@@ -90,7 +90,7 @@ namespace Services.Services
                 NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
                 NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
                 NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
-                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+                
 
             }).ToArrayAsync();
         }
@@ -122,7 +122,7 @@ namespace Services.Services
             newPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
             newPublicacion.PerfilIdPerfil = publicacion.PerfilIdPerfil;
             newPublicacion.PublicacionTipoIdPublicacionTipo = publicacion.PublicacionTipoIdPublicacionTipo;
-            newPublicacion.DonacionIdDonacion = publicacion.DonacionIdDonacion;
+            
 
             _context.Publicacion.Add(newPublicacion);
             await _context.SaveChangesAsync();
@@ -141,7 +141,7 @@ namespace Services.Services
                 existPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
                 existPublicacion.PerfilIdPerfil = publicacion.PerfilIdPerfil;
                 existPublicacion.LocalidadIdLocalidad = publicacion.LocalidadIdLocalidad;
-                existPublicacion.DonacionIdDonacion = publicacion.DonacionIdDonacion;
+               
 
                 await _context.SaveChangesAsync();
             }
