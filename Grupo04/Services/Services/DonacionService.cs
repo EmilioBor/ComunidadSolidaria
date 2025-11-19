@@ -56,7 +56,7 @@ namespace Services.Services
             var newDonacion = new Donacion();
 
             newDonacion.Descripcion = donacion.Descripcion;
-            newDonacion.FechaHora = donacion.FechaHora;
+            newDonacion.FechaHora = DateTime.Now;
             newDonacion.DonacionTipoIdDonacionTipo = donacion.DonacionTipoIdDonacionTipo;
             newDonacion.PerfilIdPerfil = donacion.PerfilIdPerfil;
             newDonacion.PerfilDonanteIdPerfilDonante= donacion.PerfilDonanteIdPerfilDonante;
