@@ -12,5 +12,6 @@ namespace Services.Interfaces
         Task<Mensaje> Create(MensajeDtoIn mensaje);
         Task Update(int id, MensajeDtoIn mensaje);
         Task Delete(int id);
+        Task<IEnumerable<MensajeDtoOut>> GetMessages(int chatId);
     }
 }

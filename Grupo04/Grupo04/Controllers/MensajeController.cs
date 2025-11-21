@@ -36,6 +36,15 @@ namespace Grupo04.Controllers
             }
         }
 
+        // MensajeController.cs
+
+        [HttpGet("api/v1/mensajes/chat/{chatId}")]
+        public async Task<IEnumerable<MensajeDtoOut>> GetByChat(int chatId)
+        {
+            return await _service.GetMessages(chatId);
+        }
+
+
         //agregar
         [HttpPost("api/v1/agrega/mensaje")]
         public async Task<IActionResult> Create(MensajeDtoIn mensajeDtoIn)

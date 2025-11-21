@@ -36,6 +36,13 @@ namespace Grupo04.Controllers
             }
         }
 
+
+        [HttpGet("/perfil/{nombre}")]
+        public async Task<IEnumerable<ChatDtoOut>> ChatsPerfil(string nombre)
+        {
+            return await _service.GetChatDtoByPerfil(nombre);
+        }
+
         //agregar
         [HttpPost("api/v1/agrega/chat")]
         public async Task<IActionResult> Create(ChatDtoIn chatDtoIn)

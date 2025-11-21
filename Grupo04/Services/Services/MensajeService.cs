@@ -53,7 +53,7 @@ namespace Services.Services
             var newMensaje = new Mensaje();
 
             newMensaje.Contenido = mensaje.Contenido;
-            newMensaje.FechaHora= mensaje.FechaHora;
+            newMensaje.FechaHora = DateTime.UtcNow;
             newMensaje.ChatIdChat = mensaje.ChatIdChat;
             newMensaje.PerfilIdPerfil= mensaje.PerfilIdPerfil;
 
@@ -93,7 +93,7 @@ namespace Services.Services
                 ChatIdChat = dto.ChatIdChat,
                 PerfilIdPerfil = dto.PerfilIdPerfil, // quien envía
                 Contenido = dto.Contenido,
-                FechaHora = DateTime.UtcNow
+                FechaHora = dto.FechaHora
             };
 
             _context.Mensaje.Add(message);
@@ -101,6 +101,9 @@ namespace Services.Services
 
             return message;
         }
+
+
+
 
         public async Task<IEnumerable<MensajeDtoOut>> GetMessages(int chatId)
         {
@@ -113,7 +116,7 @@ namespace Services.Services
                     NombreChatIdChat = m.ChatIdChatNavigation.PublicacionIdPublicacionNavigation.Titulo,
                     NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,//quien envía
                     Contenido = m.Contenido,
-                    FechaHora = DateTime.UtcNow
+                    FechaHora = m.FechaHora
                 }).ToListAsync();
         }
 

@@ -55,6 +55,24 @@ namespace Services.Services
                 }).SingleOrDefaultAsync();
         }
 
+
+
+        public async Task<IEnumerable<ChatDtoOut?>> GetChatDtoByPerfil(string nombre)
+        {
+            return await _context.Chat
+                .Where(c => c.PerfilIdPerfilNavigation.RazonSocial == nombre)
+                .Include(c => c.PerfilIdPerfilNavigation)
+                .Include(c => c.ReceptorIdReceptorNavigation)
+                .Include(c => c.PublicacionIdPublicacionNavigation)
+                .Select(m => new ChatDtoOut
+                {
+                    Id = m.Id,
+                    NombrePerfilidPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                    NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+                    NombreReceptorIdReceptor = m.ReceptorIdReceptorNavigation.RazonSocial
+                }).ToListAsync();
+        }
+
         public async Task<Chat> Create(ChatDtoIn chat)
         {
             if (chat.PerfilIdPerfil == chat.ReceptorIdReceptor)
