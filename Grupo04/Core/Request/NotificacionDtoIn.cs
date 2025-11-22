@@ -18,6 +18,8 @@ namespace Core.Request
 
         public string? Descripcion { get; set; }
 
-        public int NovedadIdNovedad { get; set; }
+        public int PublicacionIdPublicacion { get; set; }
+
+        public int? PerfilReceptorIdPerfilReceptor { get; set; }
     }
 }

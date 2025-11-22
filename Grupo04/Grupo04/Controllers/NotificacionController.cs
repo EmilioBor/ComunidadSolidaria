@@ -16,6 +16,13 @@ namespace Grupo04.Controllers
             _service = service;
         }
 
+
+        [HttpGet("api/v1/notificacion/buscar-nombre/{nombre}")]
+        public async Task<IEnumerable<NotificacionDtoOut>> GetNotificacionByNombre(string nombre)
+        {
+            return await _service.GetNotificacionsByReceptor(nombre);
+        }
+
         [HttpGet("api/v1/notificacions")]
         public async Task<IEnumerable<NotificacionDtoOut>> Notificacions()
         {

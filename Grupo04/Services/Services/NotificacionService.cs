@@ -28,10 +28,30 @@ namespace Services.Services
                 ChatIdChat = m.ChatIdChat,
                 Titulo = m.Titulo,
                 Descripcion = m.Descripcion,
-                NombreNovedadIdNovedad = m.NovedadIdNovedadNavigation.Titulo,
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+                NombrePerfilReceptorIdPerfilReceptor = m.PerfilReceptorIdPerfilReceptorNavigation.RazonSocial
 
             }).ToArrayAsync();
         }
+
+
+        public async Task<IEnumerable<NotificacionDtoOut>> GetNotificacionsByReceptor(string nombre)
+        {
+            return await _context.Notificacion
+                .Where(m => m.PerfilReceptorIdPerfilReceptorNavigation.RazonSocial == nombre)
+                .Select(m => new NotificacionDtoOut
+            {
+                Id = m.Id,
+                NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                ChatIdChat = m.ChatIdChat,
+                Titulo = m.Titulo,
+                Descripcion = m.Descripcion,
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+                NombrePerfilReceptorIdPerfilReceptor = m.PerfilReceptorIdPerfilReceptorNavigation.RazonSocial
+
+            }).ToArrayAsync();
+        }
+
         public async Task<Notificacion?> GetById(int id)
         {
             return await _context.Notificacion.FindAsync(id);
@@ -46,7 +66,8 @@ namespace Services.Services
                 ChatIdChat = m.ChatIdChat,
                 Titulo = m.Titulo,
                 Descripcion = m.Descripcion,
-                NombreNovedadIdNovedad = m.NovedadIdNovedadNavigation.Titulo,
+                NombrePublicacionIdPublicacion = m.PublicacionIdPublicacionNavigation.Titulo,
+                NombrePerfilReceptorIdPerfilReceptor = m.PerfilReceptorIdPerfilReceptorNavigation.RazonSocial
 
             }).SingleOrDefaultAsync();
         }
@@ -59,7 +80,8 @@ namespace Services.Services
             newNotificacion.PerfilIdPerfil = notificacion.PerfilIdPerfil;
             newNotificacion.Titulo = notificacion.Titulo;
             newNotificacion.Descripcion = notificacion.Descripcion;
-            newNotificacion.NovedadIdNovedad = notificacion.NovedadIdNovedad;
+            newNotificacion.PublicacionIdPublicacion = notificacion.PublicacionIdPublicacion;
+            newNotificacion.PerfilReceptorIdPerfilReceptor = notificacion.PerfilReceptorIdPerfilReceptor;
             
 
             _context.Notificacion.Add(newNotificacion);
@@ -76,7 +98,8 @@ namespace Services.Services
                 existNotificacion.PerfilIdPerfil = notificacion.PerfilIdPerfil;
                 existNotificacion.Titulo = notificacion.Titulo;
                 existNotificacion.Descripcion = notificacion.Descripcion;
-                existNotificacion.NovedadIdNovedad = notificacion.NovedadIdNovedad;
+                existNotificacion.PublicacionIdPublicacion = notificacion.PublicacionIdPublicacion;
+                existNotificacion.PerfilReceptorIdPerfilReceptor = notificacion.PerfilReceptorIdPerfilReceptor;
 
                 await _context.SaveChangesAsync();
             }

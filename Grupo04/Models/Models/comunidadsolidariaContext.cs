@@ -196,7 +196,9 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Contenido)
                 .IsRequired()
                 .HasColumnName("contenido");
-            entity.Property(e => e.FechaHora).HasColumnName("fechaHora");
+            entity.Property(e => e.FechaHora)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("fechaHora");
             entity.Property(e => e.PerfilIdPerfil).HasColumnName("Perfil_idPerfil");
 
             entity.HasOne(d => d.ChatIdChatNavigation).WithMany(p => p.Mensaje)
@@ -222,8 +224,9 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasColumnName("descripcion");
-            entity.Property(e => e.NovedadIdNovedad).HasColumnName("Novedad_idNovedad");
             entity.Property(e => e.PerfilIdPerfil).HasColumnName("Perfil_idPerfil");
+            entity.Property(e => e.PerfilReceptorIdPerfilReceptor).HasColumnName("PerfilReceptor_idPerfilReceptor");
+            entity.Property(e => e.PublicacionIdPublicacion).HasColumnName("Publicacion_idPublicacion");
             entity.Property(e => e.Titulo)
                 .IsRequired()
                 .HasColumnName("titulo");
@@ -233,15 +236,19 @@ public partial class comunidadsolidariaContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Chat_idChat");
 
-            entity.HasOne(d => d.NovedadIdNovedadNavigation).WithMany(p => p.Notificacion)
-                .HasForeignKey(d => d.NovedadIdNovedad)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Novedad_idNovedad");
-
-            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.Notificacion)
+            entity.HasOne(d => d.PerfilIdPerfilNavigation).WithMany(p => p.NotificacionPerfilIdPerfilNavigation)
                 .HasForeignKey(d => d.PerfilIdPerfil)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Perfil_idPerfil");
+
+            entity.HasOne(d => d.PerfilReceptorIdPerfilReceptorNavigation).WithMany(p => p.NotificacionPerfilReceptorIdPerfilReceptorNavigation)
+                .HasForeignKey(d => d.PerfilReceptorIdPerfilReceptor)
+                .HasConstraintName("PerfilReceptor_idPerfilReceptor");
+
+            entity.HasOne(d => d.PublicacionIdPublicacionNavigation).WithMany(p => p.Notificacion)
+                .HasForeignKey(d => d.PublicacionIdPublicacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Publicacion_idPublicacion");
         });
 
         modelBuilder.Entity<Novedad>(entity =>

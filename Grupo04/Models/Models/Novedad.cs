@@ -19,7 +19,5 @@ public partial class Novedad
 
     public byte[] Imagen { get; set; }
 
-    public virtual ICollection<Notificacion> Notificacion { get; set; } = new List<Notificacion>();
-
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 }

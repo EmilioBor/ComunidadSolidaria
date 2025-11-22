@@ -29,6 +29,8 @@ public partial class Publicacion
 
     public virtual Localidad LocalidadIdLocalidadNavigation { get; set; }
 
+    public virtual ICollection<Notificacion> Notificacion { get; set; } = new List<Notificacion>();
+
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 
     public virtual PublicacionTipo PublicacionTipoIdPublicacionTipoNavigation { get; set; }

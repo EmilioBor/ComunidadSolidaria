@@ -10,6 +10,8 @@ namespace Services.Interfaces
         Task<Notificacion?> GetById(int id);
         Task<NotificacionDtoOut?> GetNotificacionDtoById(int id);
         Task<Notificacion> Create(NotificacionDtoIn notificacion);
+
+        Task<IEnumerable<NotificacionDtoOut>> GetNotificacionsByReceptor(string nombre);
         Task Update(int id, NotificacionDtoIn notificacion);
         Task Delete(int id);
     }

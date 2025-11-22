@@ -37,7 +37,9 @@ public partial class Perfil
 
     public virtual ICollection<Mensaje> Mensaje { get; set; } = new List<Mensaje>();
 
-    public virtual ICollection<Notificacion> Notificacion { get; set; } = new List<Notificacion>();
+    public virtual ICollection<Notificacion> NotificacionPerfilIdPerfilNavigation { get; set; } = new List<Notificacion>();
+
+    public virtual ICollection<Notificacion> NotificacionPerfilReceptorIdPerfilReceptorNavigation { get; set; } = new List<Notificacion>();
 
     public virtual ICollection<Novedad> Novedad { get; set; } = new List<Novedad>();
 

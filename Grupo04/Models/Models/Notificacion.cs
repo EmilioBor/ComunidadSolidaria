@@ -17,11 +17,15 @@ public partial class Notificacion
 
     public string Descripcion { get; set; }
 
-    public int NovedadIdNovedad { get; set; }
+    public int PublicacionIdPublicacion { get; set; }
+
+    public int? PerfilReceptorIdPerfilReceptor { get; set; }
 
     public virtual Chat ChatIdChatNavigation { get; set; }
 
-    public virtual Novedad NovedadIdNovedadNavigation { get; set; }
-
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
+
+    public virtual Perfil PerfilReceptorIdPerfilReceptorNavigation { get; set; }
+
+    public virtual Publicacion PublicacionIdPublicacionNavigation { get; set; }
 }

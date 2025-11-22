@@ -18,6 +18,8 @@ namespace Core.Response
 
         public string? Descripcion { get; set; }
 
-        public string? NombreNovedadIdNovedad { get; set; }
+        public string? NombrePublicacionIdPublicacion { get; set; }
+
+        public string? NombrePerfilReceptorIdPerfilReceptor { get; set; }
     }
 }
