@@ -60,6 +60,30 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
+
+        public async Task<PublicacionDtoOut?> GetPublicacionDtoByTitulo(string titulo)
+        {
+            return await _context.Publicacion
+                .Where(m => m.Titulo == titulo) // filtra por título
+                .OrderByDescending(m => m.FechaCreacion) // si hay varias, toma la más reciente
+                .Select(m => new PublicacionDtoOut
+                {
+                    Id = m.Id,
+                    Titulo = m.Titulo,
+                    Descripcion = m.Descripcion,
+                    Imagen = m.Imagen,
+                    FechaCreacion = m.FechaCreacion,
+                    NombreLocalidadIdLocalidad = m.LocalidadIdLocalidadNavigation.Nombre,
+                    NombrePerfilIdPerfil = m.PerfilIdPerfilNavigation.RazonSocial,
+                    NombrePublicacionTipoIdPublicacionTipo = m.PublicacionTipoIdPublicacionTipoNavigation.Nombre,
+                })
+                .FirstOrDefaultAsync(); // devuelve la primera o null si no hay coincidencias
+        }
+
+
+
+
+
         public async Task<IEnumerable<PublicacionDtoOut>> GetPublicacionDtoByPerfil(string name)
         {
             return await _context.Publicacion.Where(m => m.PerfilIdPerfilNavigation.RazonSocial == name).Select(m => new PublicacionDtoOut

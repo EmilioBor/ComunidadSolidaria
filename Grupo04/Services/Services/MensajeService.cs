@@ -53,7 +53,7 @@ namespace Services.Services
             var newMensaje = new Mensaje();
 
             newMensaje.Contenido = mensaje.Contenido;
-            newMensaje.FechaHora = DateTime.UtcNow;
+            newMensaje.FechaHora = DateTime.SpecifyKind(mensaje.FechaHora, DateTimeKind.Unspecified);
             newMensaje.ChatIdChat = mensaje.ChatIdChat;
             newMensaje.PerfilIdPerfil= mensaje.PerfilIdPerfil;
 

@@ -49,6 +49,23 @@ namespace Grupo04.Controllers
             return Ok(publicaciones);
         }
 
+
+        [HttpGet("api/v1/publicacion/titulo/{titulo}")]
+        public async Task<ActionResult<PublicacionDtoOut[]>> GetPublicacionDtoByTitulo(string titulo)
+        {
+            var publicaciones = await _service.GetPublicacionDtoByTitulo(titulo);
+
+            if (publicaciones == null)
+            {
+                return NotFound($"No se encontraron publicaciones para el tipo: {titulo}");
+            }
+
+            return Ok(publicaciones);
+        }
+
+
+
+
         [HttpGet("api/v1/publicacion/tipopublicacion/{name}")]
         public async Task<ActionResult<PublicacionDtoOut[]>> GetPublicacionDtoByTipoPubli(string name)
         {

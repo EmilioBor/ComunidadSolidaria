@@ -14,6 +14,8 @@ namespace Services.Interfaces
         Task Update(int id, PublicacionDtoIn publicacion);
         Task Delete(int id);
 
+
+        Task<PublicacionDtoOut?> GetPublicacionDtoByTitulo(string titulo);
         Task<IEnumerable<PublicacionDtoOut>> GetPublicacionDtoByPerfil(string name);
         Task<IEnumerable<PublicacionDtoOut>> GetPublicacionDtoByTipoPubli(string name);
     }
