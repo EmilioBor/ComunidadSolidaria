@@ -17,7 +17,7 @@ public partial class UsuarioReporte
 
     public int PerfilIdPerfil { get; set; }
 
-    public DateOnly FechaHora { get; set; }
+    public DateTime FechaHora { get; set; }
 
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
 
