@@ -36,6 +36,21 @@ namespace Grupo04.Controllers
             }
         }
 
+        [HttpGet("api/v1/detalleDonacion/descripcion/ultimo/{descripcion}")]
+        public async Task<ActionResult<DonacionDetalleEstadoDtoOut>> GetDonacionDetalleUltimo(string descripcion)
+        {
+            var detalleDonacion = await _service.GetDonacionDetalleEstadoUltimo(descripcion);
+            if (detalleDonacion is null)
+            {
+                return NotFound(descripcion);
+            }
+            else
+            {
+                return detalleDonacion;
+            }
+        }
+
+
         //agregar
         [HttpPost("api/v1/agrega/detalleDonacion")]
         public async Task<IActionResult> Create(DonacionDetalleEstadoDtoIn detalleDonacionDtoIn)

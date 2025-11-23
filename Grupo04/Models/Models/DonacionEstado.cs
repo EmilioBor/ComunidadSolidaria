@@ -11,5 +11,7 @@ public partial class DonacionEstado
 
     public string Nombre { get; set; }
 
-    public virtual ICollection<DonacionDetalleEstado> DonacionDetalleEstado { get; set; } = new List<DonacionDetalleEstado>();
+    public int DonacionDetalleEstadoIdDonacionDetalleEstado { get; set; }
+
+    public virtual DonacionDetalleEstado DonacionDetalleEstadoIdDonacionDetalleEstadoNavigation { get; set; }
 }

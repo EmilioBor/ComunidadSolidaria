@@ -16,6 +16,6 @@ namespace Core.Request
 
         public int Cantidad { get; set; }
 
-        public int DonacionEstadoIdDonacionEstado { get; set; }
+
     }
 }

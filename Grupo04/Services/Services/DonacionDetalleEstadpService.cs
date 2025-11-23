@@ -27,10 +27,29 @@ namespace Services.Services
                 Descripcion = m.Descripcion,
                 NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
                 Cantidad = m.Cantidad,
-                NombreDonacionEstadoIdDonacionEstado = m.DonacionEstadoIdDonacionEstadoNavigation.Nombre,
+
 
             }).ToArrayAsync();
         }
+        public async Task<DonacionDetalleEstadoDtoOut?> GetDonacionDetalleEstadoUltimo(string descripcion)
+        {
+            return await _context.DonacionDetalleEstado
+                .OrderByDescending(m => m.Id) // Ordena de mayor a menor
+                .Where(m => m.DonacionIdDonacionNavigation.Descripcion == descripcion)
+                .Select(m => new DonacionDetalleEstadoDtoOut
+                {
+                    Id = m.Id,
+                    Descripcion = m.Descripcion,
+                    NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+                    Cantidad = m.Cantidad,
+                })
+                .FirstOrDefaultAsync(); // Toma solo el primero (el último creado)
+        }
+
+
+
+
+
         public async Task<DonacionDetalleEstado?> GetById(int id)
         {
             return await _context.DonacionDetalleEstado.FindAsync(id);
@@ -44,7 +63,7 @@ namespace Services.Services
                 Descripcion = m.Descripcion,
                 NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
                 Cantidad = m.Cantidad,
-                NombreDonacionEstadoIdDonacionEstado = m.DonacionEstadoIdDonacionEstadoNavigation.Nombre,
+
 
             }).SingleOrDefaultAsync();
         }
@@ -56,7 +75,7 @@ namespace Services.Services
             newDonacionDetalleEstado.Descripcion = donacionDetalleEstado.Descripcion;
             newDonacionDetalleEstado.DonacionIdDonacion = donacionDetalleEstado.DonacionIdDonacion;
             newDonacionDetalleEstado.Cantidad = donacionDetalleEstado.Cantidad;
-            newDonacionDetalleEstado.DonacionEstadoIdDonacionEstado = donacionDetalleEstado.DonacionEstadoIdDonacionEstado;
+
 
             _context.DonacionDetalleEstado.Add(newDonacionDetalleEstado);
             await _context.SaveChangesAsync();
@@ -71,7 +90,7 @@ namespace Services.Services
                 existDonacionDetalleEstado.Descripcion = DonacionDetalleEstado.Descripcion;
                 existDonacionDetalleEstado.DonacionIdDonacion = DonacionDetalleEstado.DonacionIdDonacion;
                 existDonacionDetalleEstado.Cantidad = DonacionDetalleEstado.Cantidad;
-                existDonacionDetalleEstado.DonacionEstadoIdDonacionEstado = DonacionDetalleEstado.DonacionEstadoIdDonacionEstado;
+
 
                 await _context.SaveChangesAsync();
             }

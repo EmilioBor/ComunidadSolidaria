@@ -16,6 +16,7 @@ namespace Services.Interfaces
         Task<DonacionDetalleEstadoDtoOut?> GetDonacionDetalleEstadoDtoById(int id);
         Task<DonacionDetalleEstado> Create(DonacionDetalleEstadoDtoIn donacionDetalleEstado);
         Task Update(int id, DonacionDetalleEstadoDtoIn donacionDetalleEstado);
+        Task<DonacionDetalleEstadoDtoOut?> GetDonacionDetalleEstadoUltimo(string descripcion);
         Task Delete(int id);
     }
 }

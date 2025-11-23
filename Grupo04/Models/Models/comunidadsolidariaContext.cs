@@ -122,13 +122,7 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasColumnName("descripcion");
-            entity.Property(e => e.DonacionEstadoIdDonacionEstado).HasColumnName("DonacionEstado_idDonacionEstado");
             entity.Property(e => e.DonacionIdDonacion).HasColumnName("Donacion_idDonacion");
-
-            entity.HasOne(d => d.DonacionEstadoIdDonacionEstadoNavigation).WithMany(p => p.DonacionDetalleEstado)
-                .HasForeignKey(d => d.DonacionEstadoIdDonacionEstado)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DonacionEstado_idDonacionEstado");
 
             entity.HasOne(d => d.DonacionIdDonacionNavigation).WithMany(p => p.DonacionDetalleEstado)
                 .HasForeignKey(d => d.DonacionIdDonacion)
@@ -144,9 +138,15 @@ public partial class comunidadsolidariaContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasIdentityOptions(null, null, null, 999999L, null, null)
                 .HasColumnName("id");
+            entity.Property(e => e.DonacionDetalleEstadoIdDonacionDetalleEstado).HasColumnName("DonacionDetalleEstado_idDonacionDetalleEstado");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasColumnName("nombre");
+
+            entity.HasOne(d => d.DonacionDetalleEstadoIdDonacionDetalleEstadoNavigation).WithMany(p => p.DonacionEstado)
+                .HasForeignKey(d => d.DonacionDetalleEstadoIdDonacionDetalleEstado)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DonacionDetalleEstado_idDonacionDetalleEstado");
         });
 
         modelBuilder.Entity<DonacionTipo>(entity =>

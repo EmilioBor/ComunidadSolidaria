@@ -15,9 +15,7 @@ public partial class DonacionDetalleEstado
 
     public int Cantidad { get; set; }
 
-    public int DonacionEstadoIdDonacionEstado { get; set; }
-
-    public virtual DonacionEstado DonacionEstadoIdDonacionEstadoNavigation { get; set; }
+    public virtual ICollection<DonacionEstado> DonacionEstado { get; set; } = new List<DonacionEstado>();
 
     public virtual Donacion DonacionIdDonacionNavigation { get; set; }
 }
