@@ -36,6 +36,24 @@ namespace Grupo04.Controllers
             }
         }
 
+
+        [HttpGet("api/v1/donacion/nombredonacion/{estado}")]
+        public async Task<ActionResult<DonacionEstadoDtoOut>> GetDetalleDonacionTipoByNombre(string estado)
+        {
+            var detalleDonacionTipo = await _service.GetDetalleDonacionTipoDtoByNombre(estado);
+            if (detalleDonacionTipo is null)
+            {
+                return NotFound(estado);
+            }
+            else
+            {
+                return detalleDonacionTipo;
+            }
+        }
+
+
+
+
         //agregar
         [HttpPost("api/v1/agrega/detalleDonacionTipo")]
         public async Task<IActionResult> Create(DonacionEstadoDtoIn detalleDonacionTipoDtoIn)

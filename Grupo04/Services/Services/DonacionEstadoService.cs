@@ -46,6 +46,22 @@ namespace Services.Services
             }).SingleOrDefaultAsync();
         }
 
+        public async Task<DonacionEstadoDtoOut?> GetDetalleDonacionTipoDtoByNombre(string estado)
+        {
+            return await _context.DonacionEstado
+                .Where(m => m.DonacionIdDonacionNavigation.Descripcion == estado)
+                .OrderByDescending(m => m.Id)   // 👈 Ordenar del más nuevo al más viejo
+                .Select(m => new DonacionEstadoDtoOut
+                {
+                    Id = m.Id,
+                    Nombre = m.Nombre,
+                    NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
+                })
+                .FirstOrDefaultAsync();   // 👈 Tomar el último creado
+        }
+
+
+
         public async Task<DonacionEstado> Create(DonacionEstadoDtoIn DonacionEstado)
         {
             var newDonacionEstado = new DonacionEstado();

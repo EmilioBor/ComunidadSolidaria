@@ -10,5 +10,6 @@ namespace Services.Interfaces
         Task<DonacionEstado?> GetById(int id);
         Task<DonacionEstadoDtoOut?> GetetalleDonacionTipoDtoById(int id);
         Task<DonacionEstado> Create(DonacionEstadoDtoIn donacionEstado);
+        Task<DonacionEstadoDtoOut?> GetDetalleDonacionTipoDtoByNombre(string estado);
     }
 }
