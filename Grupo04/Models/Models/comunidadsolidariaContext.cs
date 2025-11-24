@@ -138,15 +138,15 @@ public partial class comunidadsolidariaContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasIdentityOptions(null, null, null, 999999L, null, null)
                 .HasColumnName("id");
-            entity.Property(e => e.DonacionDetalleEstadoIdDonacionDetalleEstado).HasColumnName("DonacionDetalleEstado_idDonacionDetalleEstado");
+            entity.Property(e => e.DonacionIdDonacion).HasColumnName("Donacion_idDonacion");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasColumnName("nombre");
 
-            entity.HasOne(d => d.DonacionDetalleEstadoIdDonacionDetalleEstadoNavigation).WithMany(p => p.DonacionEstado)
-                .HasForeignKey(d => d.DonacionDetalleEstadoIdDonacionDetalleEstado)
+            entity.HasOne(d => d.DonacionIdDonacionNavigation).WithMany(p => p.DonacionEstado)
+                .HasForeignKey(d => d.DonacionIdDonacion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DonacionDetalleEstado_idDonacionDetalleEstado");
+                .HasConstraintName("Donacion_idDonacion");
         });
 
         modelBuilder.Entity<DonacionTipo>(entity =>

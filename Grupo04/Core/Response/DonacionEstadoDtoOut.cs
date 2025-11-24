@@ -11,6 +11,6 @@ namespace Core.Response
         public int Id { get; set; }
 
         public string? Nombre { get; set; }
-        public string? NombreDonacionDetalleEstadoIdDonacionDetalleEstado { get; set; }
+        public string? NombreDonacionIdDonacion { get; set; }
     }
 }

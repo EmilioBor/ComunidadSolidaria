@@ -12,6 +12,6 @@ namespace Core.Request
 
         public string? Nombre { get; set; }
 
-        public int DonacionDetalleEstadoIdDonacionDetalleEstado { get; set; }
+        public int DonacionIdDonacion { get; set; }
     }
 }

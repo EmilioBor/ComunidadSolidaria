@@ -23,6 +23,8 @@ public partial class Donacion
 
     public virtual ICollection<DonacionDetalleEstado> DonacionDetalleEstado { get; set; } = new List<DonacionDetalleEstado>();
 
+    public virtual ICollection<DonacionEstado> DonacionEstado { get; set; } = new List<DonacionEstado>();
+
     public virtual DonacionTipo DonacionTipoIdDonacionTipoNavigation { get; set; }
 
     public virtual Perfil PerfilDonanteIdPerfilDonanteNavigation { get; set; }

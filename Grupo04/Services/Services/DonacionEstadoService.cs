@@ -25,7 +25,7 @@ namespace Services.Services
             {
                 Id = m.Id,
                 Nombre = m.Nombre,
-                NombreDonacionDetalleEstadoIdDonacionDetalleEstado = m.DonacionDetalleEstadoIdDonacionDetalleEstadoNavigation.Descripcion
+                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
 
 
             }).ToArrayAsync();
@@ -41,7 +41,7 @@ namespace Services.Services
             {
                 Id = m.Id,
                 Nombre = m.Nombre,
-                NombreDonacionDetalleEstadoIdDonacionDetalleEstado = m.DonacionDetalleEstadoIdDonacionDetalleEstadoNavigation.Descripcion
+                NombreDonacionIdDonacion = m.DonacionIdDonacionNavigation.Descripcion,
 
             }).SingleOrDefaultAsync();
         }
@@ -51,7 +51,7 @@ namespace Services.Services
             var newDonacionEstado = new DonacionEstado();
 
             newDonacionEstado.Nombre = DonacionEstado.Nombre;
-            newDonacionEstado.DonacionDetalleEstadoIdDonacionDetalleEstado = DonacionEstado.DonacionDetalleEstadoIdDonacionDetalleEstado;
+            newDonacionEstado.DonacionIdDonacion = DonacionEstado.DonacionIdDonacion;
             
 
             _context.DonacionEstado.Add(newDonacionEstado);

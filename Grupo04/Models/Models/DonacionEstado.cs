@@ -11,7 +11,7 @@ public partial class DonacionEstado
 
     public string Nombre { get; set; }
 
-    public int DonacionDetalleEstadoIdDonacionDetalleEstado { get; set; }
+    public int DonacionIdDonacion { get; set; }
 
-    public virtual DonacionDetalleEstado DonacionDetalleEstadoIdDonacionDetalleEstadoNavigation { get; set; }
+    public virtual Donacion DonacionIdDonacionNavigation { get; set; }
 }
