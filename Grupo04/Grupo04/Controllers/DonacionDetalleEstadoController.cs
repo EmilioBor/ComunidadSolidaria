@@ -6,7 +6,7 @@ using Services.Interfaces;
 
 namespace Grupo04.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class DetalleDonacionController : ControllerBase
     {
@@ -16,86 +16,70 @@ namespace Grupo04.Controllers
             _service = service;
         }
 
-        [HttpGet("api/v1/detalleDonacions")]
-        public async Task<IEnumerable<DonacionDetalleEstadoDtoOut>> DetalleDonacions()
+        [HttpGet]
+        public async Task<IEnumerable<DonacionDetalleEstadoDtoOut>> GetAll()
         {
             return await _service.GetDonacionDetalleEstados();
         }
 
-        [HttpGet("api/v1/detalleDonacion/id/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<DonacionDetalleEstadoDtoOut>> GetDetalleDonacionById(int id)
         {
             var detalleDonacion = await _service.GetDonacionDetalleEstadoDtoById(id);
             if (detalleDonacion is null)
-            {
                 return NotFound(id);
-            }
-            else
-            {
-                return detalleDonacion;
-            }
+
+            return detalleDonacion;
         }
 
-        [HttpGet("api/v1/detalleDonacion/descripcion/ultimo/{descripcion}")]
+        [HttpGet("ultimo/{descripcion}")]
         public async Task<ActionResult<DonacionDetalleEstadoDtoOut>> GetDonacionDetalleUltimo(string descripcion)
         {
             var detalleDonacion = await _service.GetDonacionDetalleEstadoUltimo(descripcion);
             if (detalleDonacion is null)
-            {
                 return NotFound(descripcion);
-            }
-            else
-            {
-                return detalleDonacion;
-            }
+
+            return detalleDonacion;
         }
 
-
-        //agregar
-        [HttpPost("api/v1/agrega/detalleDonacion")]
-        public async Task<IActionResult> Create(DonacionDetalleEstadoDtoIn detalleDonacionDtoIn)
+        [HttpPost]
+        public async Task<IActionResult> Create(DonacionDetalleEstadoDtoIn dto)
         {
-            var newDetalleDonacion = await _service.Create(detalleDonacionDtoIn);
+            var nuevo = await _service.Create(dto);
 
-            return CreatedAtAction(nameof(GetDetalleDonacionById), new { id = newDetalleDonacion.Id });
+            return CreatedAtAction(
+                nameof(GetDetalleDonacionById),
+                new { id = nuevo.Id },
+                nuevo
+            );
         }
 
-        //Editar
-        [HttpPut("api/v1/editar/{id}")]
-        public async Task<IActionResult> Update(int id, DonacionDetalleEstadoDtoIn detalleDonacionDtoIn)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, DonacionDetalleEstadoDtoIn dto)
         {
-            if (id != detalleDonacionDtoIn.Id)
-                return BadRequest(new { message = $"El ID = {id} de la URL no coincide con el ID({detalleDonacionDtoIn.Id}) del cuerpo de la solicitud" });
+            if (id != dto.Id)
+                return BadRequest("El ID no coincide.");
 
-            var detalleDonacionToUpdate = await _service.GetDonacionDetalleEstadoDtoById(id);
+            var existente = await _service.GetDonacionDetalleEstadoDtoById(id);
 
-            if (detalleDonacionToUpdate is not null)
-            {
-                await _service.Update(id, detalleDonacionDtoIn);
-                return NoContent();
-            }
-            else
-            {
+            if (existente is null)
                 return NotFound(id);
-            }
 
+            await _service.Update(id, dto);
+            return NoContent();
         }
 
-        //ELIMINAr
-        [HttpDelete("api/v1/delete/detalleDonacion/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var toDelete = await _service.GetDonacionDetalleEstadoDtoById(id);
 
-            if (toDelete is not null)
-            {
-                await _service.Delete(id);
-                return Ok();
-            }
-            else
-            {
+            if (toDelete is null)
                 return NotFound(id);
-            }
+
+            await _service.Delete(id);
+            return Ok();
         }
     }
+
 }
