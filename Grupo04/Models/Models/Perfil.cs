@@ -33,6 +33,10 @@ public partial class Perfil
 
     public virtual ICollection<Donacion> DonacionPerfilIdPerfilNavigation { get; set; } = new List<Donacion>();
 
+    public virtual ICollection<Envio> EnvioPerfilEmisorIdPerfilEmisorNavigation { get; set; } = new List<Envio>();
+
+    public virtual ICollection<Envio> EnvioPerfilReceptorIdPerfilReceptorNavigation { get; set; } = new List<Envio>();
+
     public virtual Localidad LocalidadIdLocalidadNavigation { get; set; }
 
     public virtual ICollection<Mensaje> Mensaje { get; set; } = new List<Mensaje>();

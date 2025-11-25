@@ -23,6 +23,8 @@ public partial class comunidadsolidariaContext : DbContext
 
     public virtual DbSet<DonacionTipo> DonacionTipo { get; set; }
 
+    public virtual DbSet<Envio> Envio { get; set; }
+
     public virtual DbSet<Localidad> Localidad { get; set; }
 
     public virtual DbSet<Mensaje> Mensaje { get; set; }
@@ -160,6 +162,55 @@ public partial class comunidadsolidariaContext : DbContext
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasColumnName("descripcion");
+        });
+
+        modelBuilder.Entity<Envio>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Envio_pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasIdentityOptions(null, null, null, 999999L, null, null)
+                .HasColumnName("id");
+            entity.Property(e => e.Aclaracion)
+                .IsRequired()
+                .HasColumnName("aclaracion");
+            entity.Property(e => e.DireccionEmisor)
+                .IsRequired()
+                .HasColumnName("direccionEmisor");
+            entity.Property(e => e.DireccionEreceptor)
+                .IsRequired()
+                .HasColumnName("direccionEReceptor");
+            entity.Property(e => e.DonacionIddonacion).HasColumnName("donacion_iddonacion");
+            entity.Property(e => e.LocalidadEmisorIdLocalidadEmisor).HasColumnName("LocalidadEmisor_idLocalidadEmisor");
+            entity.Property(e => e.LocalidadReceptorIdLocalidadReceptor).HasColumnName("LocalidadReceptor_idLocalidadReceptor");
+            entity.Property(e => e.PerfilEmisorIdPerfilEmisor).HasColumnName("PerfilEmisor_idPerfilEmisor");
+            entity.Property(e => e.PerfilReceptorIdPerfilReceptor).HasColumnName("PerfilReceptor_idPerfilReceptor");
+
+            entity.HasOne(d => d.DonacionIddonacionNavigation).WithMany(p => p.Envio)
+                .HasForeignKey(d => d.DonacionIddonacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Donacion_idDonacion");
+
+            entity.HasOne(d => d.LocalidadEmisorIdLocalidadEmisorNavigation).WithMany(p => p.EnvioLocalidadEmisorIdLocalidadEmisorNavigation)
+                .HasForeignKey(d => d.LocalidadEmisorIdLocalidadEmisor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("LocalidadEmisor_idLocalidaEmir");
+
+            entity.HasOne(d => d.LocalidadReceptorIdLocalidadReceptorNavigation).WithMany(p => p.EnvioLocalidadReceptorIdLocalidadReceptorNavigation)
+                .HasForeignKey(d => d.LocalidadReceptorIdLocalidadReceptor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("LocalidadReceptor_idLocalidadreceptor");
+
+            entity.HasOne(d => d.PerfilEmisorIdPerfilEmisorNavigation).WithMany(p => p.EnvioPerfilEmisorIdPerfilEmisorNavigation)
+                .HasForeignKey(d => d.PerfilEmisorIdPerfilEmisor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("PerfilEmisor_idPerfilEmisor");
+
+            entity.HasOne(d => d.PerfilReceptorIdPerfilReceptorNavigation).WithMany(p => p.EnvioPerfilReceptorIdPerfilReceptorNavigation)
+                .HasForeignKey(d => d.PerfilReceptorIdPerfilReceptor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("PerfilReceptor_idPerfilReceptor");
         });
 
         modelBuilder.Entity<Localidad>(entity =>

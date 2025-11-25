@@ -15,6 +15,10 @@ public partial class Localidad
 
     public int ProvinciaIdProvincia { get; set; }
 
+    public virtual ICollection<Envio> EnvioLocalidadEmisorIdLocalidadEmisorNavigation { get; set; } = new List<Envio>();
+
+    public virtual ICollection<Envio> EnvioLocalidadReceptorIdLocalidadReceptorNavigation { get; set; } = new List<Envio>();
+
     public virtual ICollection<Perfil> Perfil { get; set; } = new List<Perfil>();
 
     public virtual Provincia ProvinciaIdProvinciaNavigation { get; set; }

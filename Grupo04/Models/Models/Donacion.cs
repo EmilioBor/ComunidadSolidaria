@@ -27,6 +27,8 @@ public partial class Donacion
 
     public virtual DonacionTipo DonacionTipoIdDonacionTipoNavigation { get; set; }
 
+    public virtual ICollection<Envio> Envio { get; set; } = new List<Envio>();
+
     public virtual Perfil PerfilDonanteIdPerfilDonanteNavigation { get; set; }
 
     public virtual Perfil PerfilIdPerfilNavigation { get; set; }
